@@ -4,6 +4,13 @@ from django.utils import timezone
 from django.db import models
 
 
+class Fish(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+
 # Create your models here.
 class Pound(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -11,6 +18,7 @@ class Pound(models.Model):
     description = models.TextField()
     created_date = models.DateTimeField(
             default=timezone.now)
+    fishes = models.ManyToManyField(Fish)
 
     def __str__(self):
         return self.name
