@@ -1,4 +1,8 @@
 <html>
-    <p>Hi there!</p>
-    <p>It works!</p>
+    <p>Pound list:</p>
+    <ul>
+    {% for pound in pounds %}
+        <li>{{pound.name}}</li>
+    {% endfor %}
+    </ul>
 </html>

@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
+from .models import Pound
 
 
 # Create your views here.
@@ -10,4 +11,5 @@ def home(request):
 
 
 def pound_list(request):
-    return render(request, 'app/pound_list.html', {})
+    pounds = Pound.objects.all()
+    return render(request, 'app/pound_list.html', {"pounds": pounds})
