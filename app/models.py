@@ -22,3 +22,13 @@ class Pound(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Review(models.Model):
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    pound = models.ForeignKey(Pound, on_delete=models.CASCADE)
+    content = models.TextField()
+    fish_caught = models.ManyToManyField(Fish)
+    fishing_date = models.DateField()
+    rating = models.IntegerField()
+

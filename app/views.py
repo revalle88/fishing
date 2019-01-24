@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from .models import Pound
-from .forms import PoundForm
+from .models import Pound, Review
+from .forms import PoundForm, ReviewForm
 
 from django.shortcuts import redirect
 
@@ -28,3 +28,16 @@ def pound_new(request):
     else:
         form = PoundForm()
         return render(request, 'app/pound_edit.html', {'form': form})
+
+
+def review_new(request):
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.author = request.user
+            review.save()
+            return redirect('pounds')
+    else:
+        form = ReviewForm()
+        return render(request, 'app/review_add.html', {'form': form})
