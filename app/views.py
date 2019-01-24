@@ -32,12 +32,16 @@ def pound_new(request):
 
 def review_new(request):
     if request.method == "POST":
+        print("!!!!POST")
         form = ReviewForm(request.POST)
+        print("Get FOrm")
         if form.is_valid():
+            print("Valid")
             review = form.save(commit=False)
             review.author = request.user
             review.save()
             return redirect('pounds')
     else:
+        print("not Valid")
         form = ReviewForm()
         return render(request, 'app/review_add.html', {'form': form})

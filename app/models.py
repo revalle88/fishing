@@ -29,6 +29,9 @@ class Review(models.Model):
     pound = models.ForeignKey(Pound, on_delete=models.CASCADE)
     content = models.TextField()
     fish_caught = models.ManyToManyField(Fish)
-    fishing_date = models.DateField()
+    created_date = models.DateTimeField(
+            default=timezone.now)
+    fishing_date = models.DateTimeField(
+            default=timezone.now)
     rating = models.IntegerField()
 
