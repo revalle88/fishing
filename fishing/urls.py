@@ -16,11 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from .views import login, sample_api
+from .routers import router
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/login', login),
     url('api/sampleapi', sample_api),
+    url(r'^api/', include(router.urls)),
     url(r'', include('app.urls')),
-
 ]
