@@ -44,4 +44,5 @@ def review_new(request):
             return redirect('pounds')
     else:
         form = ReviewForm()
-        return render(request, 'app/review_add.html', {'form': form, 'hello': 'hello111'})
+        print(request.GET.get('lang', 'lang none'))
+        return render(request, 'app/review_add.html', {'form': form})
