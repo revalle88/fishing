@@ -17,6 +17,7 @@ def pound_list(request):
     pounds = Pound.objects.all()
     return render(request, 'app/pound_list.html', {"pounds": pounds})
 
+
 def pound_new(request):
     if request.method == "POST":
         form = PoundForm(request.POST)
@@ -42,6 +43,5 @@ def review_new(request):
             review.save()
             return redirect('pounds')
     else:
-        print("not Valid")
         form = ReviewForm()
-        return render(request, 'app/review_add.html', {'form': form})
+        return render(request, 'app/review_add.html', {'form': form, 'hello': 'hello111'})

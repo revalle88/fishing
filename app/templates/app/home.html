@@ -1,13 +1,16 @@
 {% load static %}
 <html>
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=192262e9-5603-4065-bba8-83d9251843a9" type="text/javascript"></script>
-<script src="{% static 'js/map_render.js' %}"></script>
+<!--<script src="{% static 'js/map_render.js' %}"></script>-->
 <link rel="stylesheet" href="{% static 'css/ymaps.css' %}">
-
+{% include "app/map_render.html" %}
 
     <h1>Home page</h1>
     <p><a href = "{% url 'pounds' %}">pound list</a></p>
-    <p><a>Add pound</a></p>
+    <p><a>Add pound </a></p>
+    <div id="new_point" style="width: 100px; height: 100px; display: none;">
+        New Form Window
+    </div>
     <div id="map"></div>
 <input type="button" id="destroyButton" value="Удалить карту"/>
 </html>

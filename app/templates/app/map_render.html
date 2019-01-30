@@ -1,3 +1,4 @@
+<script>
 ymaps.ready(init);
 var myMap;
 var a = "{% url 'pounds' %}";
@@ -26,7 +27,7 @@ function init () {
                     coords[0].toPrecision(6),
                     coords[1].toPrecision(6)
                     ].join(', ') + '</p>',
-                contentFooter:" "+url+home+" "
+                contentFooter: "<a href="+{% url 'pounds' %}+">add point</a>"
             });
         }
         else {
@@ -47,3 +48,5 @@ function init () {
         myMap.hint.close();
     });
 }
+
+</script>
