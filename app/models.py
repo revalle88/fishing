@@ -34,4 +34,6 @@ class Review(models.Model):
     fishing_date = models.DateTimeField(
             default=timezone.now)
     rating = models.IntegerField()
+    lang = models.FloatField(default=50)
+    lat = models.FloatField(default=50)
 

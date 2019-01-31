@@ -15,10 +15,12 @@ function init () {
     // левой кнопкой мыши в любой точке карты.
     // При возникновении такого события откроем балун.
     myMap.events.add('click', function (e) {
-        var myurl = "{% url 'review_new' %}"
+
         document.getElementById('new_point').style.display = 'block';
         if (!myMap.balloon.isOpen()) {
             var coords = e.get('coords');
+            var myurl = "{% url 'review_new' %}"+"?lang="+coords[0]+"&lat="+coords[1]
+
             myMap.balloon.open(coords, {
                 contentHeader:'Событие!',
                 contentBody:'<p>Кто-то щелкнул по карте.</p>' +

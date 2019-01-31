@@ -14,4 +14,4 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = Review
-        fields = ('fishing_date', 'pound', 'content', 'fish_caught', 'rating')
+        fields = ('lat', 'lang', 'fishing_date', 'pound', 'content', 'fish_caught', 'rating')
