@@ -9,7 +9,21 @@ function init () {
     }, {
         balloonMaxWidth: 200,
         searchControlProvider: 'yandex#search'
-    });
+    }),
+
+    myMap.geoObjects
+        {% for review in reviews %}
+        .add(new ymaps.Placemark([{{review.lang}}, {{review.lat}}], {
+            balloonContent: "{{review.created_date}}<br><a href = {% url 'review_show' id=review.id %}"
+        }, {
+            preset: 'islands#icon',
+            iconColor: '#0095b6'
+        }))
+        {% endfor %}
+
+
+
+
 
     // Обработка события, возникающего при щелчке
     // левой кнопкой мыши в любой точке карты.
@@ -48,6 +62,14 @@ function init () {
     myMap.events.add('balloonopen', function (e) {
         myMap.hint.close();
     });
+
+
+
+
+
+
 }
 
 </script>
+
+

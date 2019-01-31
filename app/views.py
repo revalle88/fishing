@@ -10,7 +10,8 @@ from django.shortcuts import redirect
 
 # Create your views here.
 def home(request):
-    return render(request, 'app/home.html', {})
+    reviews = Review.objects.all()
+    return render(request, 'app/home.html', {"reviews": reviews})
 
 
 def pound_list(request):
@@ -50,3 +51,7 @@ def review_new(request):
         print(request.GET.get('lang', 'lang none'))
         print(request.GET.get('lat', 'lat none'))
         return render(request, 'app/review_add.html', {'form': form})
+
+
+def review_show(request):
+    r_id = request.GET.get('lat', 'lat none')
