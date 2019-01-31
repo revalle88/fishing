@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^api/login', login),
     url('api/sampleapi', sample_api),
     url(r'^api/', include(router.urls)),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'', include('app.urls')),
 ]
