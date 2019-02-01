@@ -53,5 +53,8 @@ def review_new(request):
         return render(request, 'app/review_add.html', {'form': form})
 
 
-def review_show(request):
+def review_show(request, id):
+    print(id)
+    review = Review.objects.filter(id=id)[0]
     r_id = request.GET.get('lat', 'lat none')
+    return render(request, 'app/review_show.html', {'review': review})

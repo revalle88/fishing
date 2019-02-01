@@ -14,7 +14,7 @@ function init () {
     myMap.geoObjects
         {% for review in reviews %}
         .add(new ymaps.Placemark([{{review.lang}}, {{review.lat}}], {
-            balloonContent: "{{review.created_date}}<br><a href = {% url 'review_show' id=review.id %}"
+            balloonContent: "{{review.created_date}}<br><a href = {% url 'review_show' review.id %}>инфо</a>"
         }, {
             preset: 'islands#icon',
             iconColor: '#0095b6'
