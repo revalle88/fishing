@@ -7,6 +7,9 @@ from .forms import PoundForm, ReviewForm
 
 from django.shortcuts import redirect
 
+import urllib
+import json
+
 
 # Create your views here.
 def home(request):
@@ -57,4 +60,7 @@ def review_show(request, id):
     print(id)
     review = Review.objects.filter(id=id)[0]
     r_id = request.GET.get('lat', 'lat none')
+    resp = urllib.urlopen("https://api.darksky.net/forecast/caf0208379875df865f2185f5246bf48/53.8267,45.4233?units = auto").read()
+    resp_jsonified = json.loads(resp)
+    print(resp_jsonified.get('currently')['temperature'])
     return render(request, 'app/review_show.html', {'review': review})
