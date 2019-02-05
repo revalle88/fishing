@@ -26,7 +26,7 @@ SECRET_KEY = '5z$2@b*v-)$69n0f5r9%q4sr(0q!ghr4g1xh34y(a5b=tpqu%z'
 # DEBUG = True
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['young-refuge-68970.herokuapp.com']
 
 
 # Application definition
