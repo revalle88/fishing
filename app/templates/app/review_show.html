@@ -1,4 +1,11 @@
 {% extends 'app/base.html' %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'css/ymaps.css' %}">
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=192262e9-5603-4065-bba8-83d9251843a9" type="text/javascript"></script>
+{% include 'app/map_review_show.html' %}
+{% endblock %}
 
 {% block content %}
 IT WORKS
@@ -11,4 +18,6 @@ IT WORKS
     <li>{{weather.precipType}}</li>
     <li>скорость ветра: {{weather.windSpeed}}</li>
 </div>
+<div id="map1"></div>
+
 {% endblock %}

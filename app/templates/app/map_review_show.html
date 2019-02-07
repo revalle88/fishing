@@ -1,0 +1,24 @@
+<script>
+ymaps.ready(init);
+var myMap;
+var a = "{% url 'pounds' %}";
+function init () {
+    myMap = new ymaps.Map("map1", {
+        center: [57.5262, 38.3061], // Углич
+        zoom: 11
+    }, {
+        balloonMaxWidth: 200,
+        searchControlProvider: 'yandex#search'
+    }),
+
+    myMap.geoObjects
+        .add(new ymaps.Placemark([{{review.lang}}, {{review.lat}}], {
+            preset: 'islands#icon',
+            iconColor: '#0095b6'
+        }))
+
+}
+
+</script>
+
+
