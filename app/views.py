@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from .models import Pound, Review
+from .models import Pound, Review, Fish
 from .forms import PoundForm, ReviewForm
 
 from django.shortcuts import redirect
@@ -14,7 +14,8 @@ import json
 # Create your views here.
 def home(request):
     reviews = Review.objects.all()
-    return render(request, 'app/home.html', {"reviews": reviews})
+    fishes = Fish.objects.all()
+    return render(request, 'app/home.html', {"reviews": reviews, "fishes": fishes})
 
 
 def pound_list(request):

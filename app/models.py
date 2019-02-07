@@ -6,6 +6,8 @@ from django.db import models
 
 class Fish(models.Model):
     name = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    picture = models.ImageField(upload_to='app/static/images/fishes', default='app/static/images/fishes/no-img.jpg')
 
     def __str__(self):
         return self.name
