@@ -26,7 +26,7 @@ class Pound(models.Model):
 
 class Review(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    pound = models.ForeignKey(Pound, on_delete=models.CASCADE)
+    pound = models.ForeignKey(Pound, on_delete=models.CASCADE, blank=True, null=True)
     content = models.TextField()
     fish_caught = models.ManyToManyField(Fish)
     created_date = models.DateTimeField(

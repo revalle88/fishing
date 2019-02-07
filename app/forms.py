@@ -13,6 +13,8 @@ class PoundForm(forms.ModelForm):
 
 class ReviewForm(forms.ModelForm):
 
+    pound = forms.ModelChoiceField(queryset=Pound.objects.all(), required=False)
+
     class Meta:
         model = Review
         fields = ('lat', 'lang', 'fishing_date', 'pound', 'content', 'fish_caught', 'rating')

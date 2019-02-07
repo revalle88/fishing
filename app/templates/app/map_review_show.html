@@ -4,7 +4,7 @@ var myMap;
 var a = "{% url 'pounds' %}";
 function init () {
     myMap = new ymaps.Map("map1", {
-        center: [57.5262, 38.3061], // Углич
+        center: [{{review.lang}}, {{review.lat}}], // Углич
         zoom: 11
     }, {
         balloonMaxWidth: 200,
