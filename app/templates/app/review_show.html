@@ -1,7 +1,14 @@
-<html>
+{% extends 'app/base.html' %}
 
+{% block content %}
 IT WORKS
 {{review.lat}}
 {{review.lang}}
-{{review.content}}
-</html>
+<h3>Review: </h3>
+<div>{{review.content}}</div>
+<div class = "weather">
+    <li>temperature: {{weather.temperature}} C</li>
+    <li>{{weather.precipType}}</li>
+    <li>скорость ветра: {{weather.windSpeed}}</li>
+</div>
+{% endblock %}

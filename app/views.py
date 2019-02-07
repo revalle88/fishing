@@ -63,4 +63,5 @@ def review_show(request, id):
     resp = urllib.urlopen("https://api.darksky.net/forecast/caf0208379875df865f2185f5246bf48/53.8267,45.4233?units = auto").read()
     resp_jsonified = json.loads(resp)
     print(resp_jsonified.get('currently')['temperature'])
-    return render(request, 'app/review_show.html', {'review': review})
+    weather = resp_jsonified.get('currently')
+    return render(request, 'app/review_show.html', {'review': review, 'weather': weather})

@@ -1,8 +1,10 @@
-<html>
+{% extends 'app/base.html' %}
+
+{% block content %}
     <p>Pound list:</p>
     <ul>
     {% for pound in pounds %}
         <li>{{pound.name}}</li>
     {% endfor %}
     </ul>
-</html>
+{% endblock %}
