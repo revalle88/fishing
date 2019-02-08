@@ -1,5 +1,7 @@
 from django.conf.urls import url
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^pounds/$', views.pound_list, name='pounds'),
@@ -8,4 +10,4 @@ urlpatterns = [
     url(r'^reviews/(?P<id>\d+)/', views.review_show, name='review_show'),
     # url(r'^reviews/<int:id>/', views.review_show, name='review_show'),
     url(r'^$', views.home, name='home'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
