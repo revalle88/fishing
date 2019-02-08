@@ -32,6 +32,7 @@ pandocfilters==1.4.2
 pathlib2==2.3.3
 pexpect==4.6.0
 pickleshare==0.7.5
+pillow
 prometheus-client==0.5.0
 prompt-toolkit==1.0.15
 psycopg2==2.7.7
