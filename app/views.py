@@ -66,3 +66,14 @@ def review_show(request, id):
     print(resp_jsonified.get('currently')['temperature'])
     weather = resp_jsonified.get('currently')
     return render(request, 'app/review_show.html', {'review': review, 'weather': weather})
+
+
+def fishes_list(request):
+    fishes = Fish.objects.all()
+    return render(request, 'app/fish_list.html', {"fishes": fishes})
+
+
+def fish_details(request, id):
+    fish = Fish.objects.filter(id=id)[0]
+    return render(request, 'app/fish_details.html', {"fish": fish})
+

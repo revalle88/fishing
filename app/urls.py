@@ -5,6 +5,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^pounds/$', views.pound_list, name='pounds'),
+    url(r'^fishes/(?P<id>\d+)/', views.fish_details, name='fish_details'),
+    url(r'^fishes/$', views.fishes_list, name='fishes'),
     url(r'^pound/new/$', views.pound_new, name='pound_new'),
     url(r'^review/new/$', views.review_new, name='review_new'),
     url(r'^reviews/(?P<id>\d+)/', views.review_show, name='review_show'),

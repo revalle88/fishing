@@ -1,0 +1,12 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <p>FIsh list:</p>
+
+
+        <div>
+            <img src = "{{fish.picture.url}}" class = "fish_icon">{{fish.name}}<br>{{fish.description}}
+        </div>
+
+
+{% endblock %}
