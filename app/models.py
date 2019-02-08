@@ -12,6 +12,9 @@ class Fish(models.Model):
     def __str__(self):
         return self.name
 
+    def __unicode__(self):
+        return self.name
+
 
 # Create your models here.
 class Pound(models.Model):
@@ -23,6 +26,9 @@ class Pound(models.Model):
     fishes = models.ManyToManyField(Fish)
 
     def __str__(self):
+        return self.name
+
+    def __unicode__(self):
         return self.name
 
 
@@ -38,4 +44,7 @@ class Review(models.Model):
     rating = models.IntegerField()
     lang = models.FloatField(default=50)
     lat = models.FloatField(default=50)
+
+    def __unicode__(self):
+        return self.id
 
