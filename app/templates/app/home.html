@@ -1,18 +1,26 @@
+{% extends 'app/base.html' %}
 {% load static %}
-<html>
+{% block header %}
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=192262e9-5603-4065-bba8-83d9251843a9" type="text/javascript"></script>
-<!--<script src="{% static 'js/map_render.js' %}"></script>-->
 <link rel="stylesheet" href="{% static 'css/ymaps.css' %}">
+
 {% include "app/map_render.html" %}
+
+{% endblock %}
+
+{% block map %}
+    <div id="new_point" style="width: 80px; height: 80px; display: none;">
+        New Form Window
+    </div>
+        <div id="map"></div>
+{% endblock %}
+
+{% block content %}
 
     <h1>Home page {{review.id}}</h1>
 
-    <p><a href = "{% url 'pounds' %}">pound list</a></p>
-    <p><a>Add pound </a></p>
-    <div id="new_point" style="width: 100px; height: 100px; display: none;">
-        New Form Window
-    </div>
-    <div id="map"></div>
+
+
 <input type="button" id="destroyButton" value="Удалить карту"/>
 <div class = "fishes_main">
     <ul>
@@ -22,4 +30,5 @@
     </ul>
 
 </div>
-</html>
+
+{% endblock %}

@@ -5,11 +5,25 @@
 {% block header %}
 {% endblock %}
 <body>
-<div class = 'container'>
+<div class = "container">
+    <div id = "header">
+        <div id = "login_menu">Login / Register</div>
+        <div id = map_wrapper>
+            {% block map %}
+            {% endblock %}
 
-  {% block content %}
-  {% endblock %}
+        </div>
+        <div id="main_menu">
+            <a href = "{% url 'fishes' %}">РЫБА  </a>
+            <a href = "{% url 'pounds' %}">Водоемы</a>
+        </div>
+    </div>
+    <div class = 'container'>
 
+        {% block content %}
+        {% endblock %}
+
+    </div>
 </div>
 </body>
 
