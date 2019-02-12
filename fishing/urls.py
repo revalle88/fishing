@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'', include('app.urls')),
+    url(r'^social/', include('social_django.urls')),
 ]
