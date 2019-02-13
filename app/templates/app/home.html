@@ -28,4 +28,11 @@
 
 </div>
 
+<div class="reviews_main">
+    Обзоры:
+    {% for review in reviews %}
+    <li><a href = "{% url 'review_show' review.id %}">{{review.author.username}}  {{review.fishing_date}} </a></li>
+    {% endfor %}
+</div>
+
 {% endblock %}
