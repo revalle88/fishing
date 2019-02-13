@@ -4,7 +4,7 @@ var myMap;
 var a = "{% url 'pounds' %}";
 function init () {
     myMap = new ymaps.Map("map", {
-        center: [57.5262, 38.3061], // Углич
+        center: [53.2262, 45.3061], // Углич
         zoom: 11
     }, {
         balloonMaxWidth: 200,
@@ -13,7 +13,7 @@ function init () {
 
     myMap.geoObjects
         {% for review in reviews %}
-        .add(new ymaps.Placemark([{{review.lang}}, {{review.lat}}], {
+        .add(new ymaps.Placemark([parseFloat({{review.lat}}), parseFloat({{review.lang}})], {
             balloonContent: "{{review.created_date}}<br><a href = {% url 'review_show' review.id %}>инфо</a>"
         }, {
             preset: 'islands#icon',

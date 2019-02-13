@@ -46,5 +46,5 @@ class Review(models.Model):
     lat = models.FloatField(default=50)
 
     def __unicode__(self):
-        return self.id
+        return str(self.id)
 

@@ -70,6 +70,7 @@ def review_show(request, id):
     resp_jsonified = json.loads(resp)
     print(resp_jsonified.get('currently')['temperature'])
     weather = resp_jsonified.get('currently')
+    print(review.lat)
     return render(request, 'app/review_show.html', {'review': review, 'weather': weather})
 
 
