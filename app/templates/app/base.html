@@ -13,7 +13,7 @@
                 Hi {{ user.username }}!
                 <p><a href="{% url 'logout' %}">logout</a></p>
             {% else %}
-                <a href="{% url 'login' %}">Login </a>/  <a href="/accounts/register">Register </a></div>
+                <a href="{% url 'login' %}">Login </a>/  <a href="/accounts/sign_up">Register </a></div>
             {% endif %}
         <div id = map_wrapper>
             {% block map %}

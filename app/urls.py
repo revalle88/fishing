@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    url(r'^accounts/sign_up', views.SignUp.as_view(), name='sign_up'),
     url(r'^pounds/$', views.pound_list, name='pounds'),
     url(r'^fishes/(?P<id>\d+)/', views.fish_details, name='fish_details'),
     url(r'^fishes/$', views.fishes_list, name='fishes'),

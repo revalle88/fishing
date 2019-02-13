@@ -11,6 +11,11 @@ import urllib
 import json
 
 
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views import generic
+
+
 # Create your views here.
 def home(request):
     reviews = Review.objects.all()
@@ -77,3 +82,8 @@ def fish_details(request, id):
     fish = Fish.objects.filter(id=id)[0]
     return render(request, 'app/fish_details.html', {"fish": fish})
 
+
+class SignUp(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/sign_up.html'
