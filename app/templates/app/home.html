@@ -17,15 +17,12 @@
 
 {% block content %}
 
-    <h1>Home page {{review.id}}</h1>
 
-
-
-<input type="button" id="destroyButton" value="Удалить карту"/>
 <div class = "fishes_main">
-    <ul>
+    Рыба:
+    <ul class="fishes_list_home">
     {% for fish in fishes %}
-        <li><img src = "{{fish.picture.url}}" class = "fish_icon">{{fish.name}}</li>
+        <li><a href = "{% url 'fish_details' fish.id %}"><img src = "{{fish.picture.url}}" class = "fish_icon">{{fish.name}}</a></li>
     {% endfor %}
     </ul>
 
