@@ -33,7 +33,7 @@ function init () {
         document.getElementById('new_point').style.display = 'block';
         if (!myMap.balloon.isOpen()) {
             var coords = e.get('coords');
-            var myurl = "{% url 'review_new' %}"+"?lang="+coords[0]+"&lat="+coords[1]
+            var myurl = "{% url 'review_new' %}"+"?lat="+coords[0]+"&lang="+coords[1]
 
             myMap.balloon.open(coords, {
                 contentHeader:'Событие!',
