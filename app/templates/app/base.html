@@ -5,26 +5,41 @@
 {% block header %}
 {% endblock %}
 <body>
-<div class = "container">
-    <div id = "header">
+<div class = "container-fluid">
 
-        <div id = "login_menu">
-            {% if user.is_authenticated %}
-                Hi {{ user.username }}!
-                <p><a href="{% url 'logout' %}">logout</a></p>
-            {% else %}
-                <a href="{% url 'login' %}">Login </a>/  <a href="/accounts/sign_up">Register </a></div>
-            {% endif %}
+        <div id = "main_header_top_wrapper">
+            <div id = "main_header_top">
+                <div id="main_header_top_support"><a class = "header_link" href="mailto:revalle88@gmail.com">связаться с нами</a></div>
+                <div id = "main_header_top_accounts">
+                    {% if user.is_authenticated %}
+                        Здравствуй, {{ user.username }}!
+                        <a href="{% url 'logout' %}" class = "header_link">Выйти</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class = "header_link">Войти</a>
+                    {% endif %}
+                 </div>
+            </div>
+        </div>
+    <div class = "main_header_wrapper">
+        <div class = "main_header">
+            <div class = "logo"><a href = "{% url 'home' %}">GeoРыба</a></div>
+            <div class = "main_menu">
+                <a href = "{% url 'fishes' %}" class = "main_menu_item">РЫБА  </a>
+                <a href = "{% url 'pounds' %}" class = "main_menu_item">Водоемы</a>
+                <a href = '#' class = "main_menu_item">Блог</a>
+                <a href = '#' class = "main_menu_item">Точки</a>
+                <a href = '#' class = "main_menu_item">Карта</a>
+            </div>
+        </div>
+    </div>
+
         <div id = map_wrapper>
             {% block map %}
             {% endblock %}
 
         </div>
-        <div id="main_menu">
-            <a href = "{% url 'fishes' %}">РЫБА  </a>
-            <a href = "{% url 'pounds' %}">Водоемы</a>
-        </div>
-    </div>
+
+
     <div class = 'container'>
 
         {% block content %}

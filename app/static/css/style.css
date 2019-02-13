@@ -7,3 +7,78 @@
     width: 40px;
     height: 40px;
 }
+
+#main_header_top_wrapper {
+    background-color: #4286f4;
+    width: 100%;
+}
+
+
+#main_header_top {
+    width: 100%;
+    max-width: 1130px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+#main_header_top_support {
+    display: inline-block;
+    font: 600 12px/1.7 Helvetica,sans-serif !important;
+    color: #fff !important;
+    text-decoration: none;
+    letter-spacing: .2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+}
+
+.header_link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+#main_header_top_accounts {
+    display: inline-block;
+    float: right;
+    font: 600 12px/1.7 Helvetica,sans-serif !important;
+    color: #fff !important;
+    text-decoration: none;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+}
+
+.main_header_wrapper {
+    background-color: #eff0f4;
+    width: 100%;
+}
+
+.main_header {
+    height: 40px;
+    width: 100%;
+    max-width: 1130px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.logo{
+
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+}
+
+.main_menu {
+    float: right;
+    width: 75%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 70px;
+
+}
+
+.main_menu_item{
+     padding-left: 70px;
+}
