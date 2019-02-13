@@ -107,6 +107,7 @@ SOCIAL_AUTH_VK_OAUTH2_SECRET = 'FFLxC4mBIzfudaDGqUOA'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Password validation
