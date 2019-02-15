@@ -13,7 +13,7 @@ function init () {
 
     myMap.geoObjects
         {% for review in reviews %}
-        .add(new ymaps.Placemark([parseFloat({{review.lat}}), parseFloat({{review.lang}})], {
+        .add(new ymaps.Placemark([parseFloat("{{review.lat}}".replace(",",".")), parseFloat("{{review.lang}}".replace(",","."))], {
             balloonContent: "{{review.created_date}}<br><a href = {% url 'review_show' review.id %}>инфо</a>"
         }, {
             preset: 'islands#icon',

@@ -3,9 +3,12 @@ ymaps.ready(init);
 var myMap;
 var a = "{% url 'pounds' %}";
 function init () {
-    console.log({{review.lat}});
+    var lat = parseFloat("{{review.lat}}".replace(",","."));
+    var lang = parseFloat("{{review.lang}}".replace(",","."));
+    console.log(lat);
+    console.log(lang);
     myMap = new ymaps.Map("map1", {
-        center: [parseFloat({{review.lat}}), parseFloat({{review.lang}})], // Углич
+        center: [lat, lang], // Углич
         zoom: 11
     }, {
         balloonMaxWidth: 200,
@@ -13,7 +16,7 @@ function init () {
     }),
 
     myMap.geoObjects
-        .add(new ymaps.Placemark([parseFloat({{review.lat}}), parseFloat({{review.lang}})], {
+        .add(new ymaps.Placemark([lat, lang], {
             preset: 'islands#icon',
             iconColor: '#0095b6'
         }))
