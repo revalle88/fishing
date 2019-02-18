@@ -20,7 +20,8 @@ from django.views import generic
 def home(request):
     reviews = Review.objects.all()
     fishes = Fish.objects.all()
-    return render(request, 'app/home.html', {"reviews": reviews, "fishes": fishes})
+    pounds = Pound.objects.all()
+    return render(request, 'app/home.html', {"reviews": reviews, "fishes": fishes, "pounds": pounds})
 
 
 def pound_list(request):

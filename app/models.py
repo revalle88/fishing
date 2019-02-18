@@ -24,6 +24,9 @@ class Pound(models.Model):
     created_date = models.DateTimeField(
             default=timezone.now)
     fishes = models.ManyToManyField(Fish)
+    lang = models.FloatField(default=50)
+    lat = models.FloatField(default=50)
+    is_paid = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

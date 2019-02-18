@@ -20,6 +20,14 @@ function init () {
             iconColor: '#0095b6'
         }))
         {% endfor %}
+        {% for pound in pounds %}
+        .add(new ymaps.Placemark([parseFloat("{{pound.lat}}".replace(",",".")), parseFloat("{{pound.lang}}".replace(",","."))], {
+            balloonContent: "Hello! {{pound.name}}"
+        }, {
+            preset: 'islands#circleDotIcon',
+            iconColor: 'green'
+        }))
+        {% endfor %}
 
 
 
