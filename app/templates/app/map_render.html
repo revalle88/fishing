@@ -22,7 +22,7 @@ function init () {
         {% endfor %}
         {% for pound in pounds %}
         .add(new ymaps.Placemark([parseFloat("{{pound.lat}}".replace(",",".")), parseFloat("{{pound.lang}}".replace(",","."))], {
-            balloonContent: "<a href = {% url 'pound_show' pound.id %}>инфо</a>"
+            balloonContent: "<a href = {% url 'pound_show' pound.id %}>{{pound.name}} - {{pound.is_paid}}</a>"
         }, {
             preset: 'islands#circleDotIcon',
             iconColor: 'green'
@@ -51,7 +51,7 @@ function init () {
                     coords[0].toPrecision(6),
                     coords[1].toPrecision(6)
                     ].join(', ') + '</p>',
-                contentFooter: "<a href="+myurl+">add point</a><br><a href="+new_pound_url+">add pound</a>"
+                contentFooter: "<a href="+myurl+">Добавить точку ловли</a><br><a href="+new_pound_url+">Добавить водоем</a>"
             });
         }
         else {

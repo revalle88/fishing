@@ -32,7 +32,8 @@ def pound_list(request):
 def pound_show(request, id):
     pound = Pound.objects.filter(id=id)[0]
     point = {"lat": pound.lat, "lang": pound.lang}
-    return render(request, 'app/pound_details.html', {"pound": pound, "point": point})
+    reviews = Review.objects.filter(pound=pound)
+    return render(request, 'app/pound_details.html', {"pound": pound, "point": point, "reviews": reviews})
 
 
 def pound_new(request):
