@@ -27,6 +27,8 @@ class Pound(models.Model):
     lang = models.FloatField(default=50)
     lat = models.FloatField(default=50)
     is_paid = models.BooleanField(default=False)
+    contacts = models.CharField(blank=True, max_length=200)
+    conditions = models.CharField(blank=True, max_length=400)
 
     def __str__(self):
         return self.name

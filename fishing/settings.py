@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'app',
 ]
 
+INSTALLED_APPS += ('django_summernote', )
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',

@@ -2,13 +2,20 @@
 from django import forms
 
 from .models import Pound, Review, Fish
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 
 class PoundForm(forms.ModelForm):
 
     class Meta:
         model = Pound
-        fields = ('name', 'description', 'fishes')
+        fields = (
+            'lat', 'lang', 'name', 'description', 'fishes', 'is_paid',  'contacts', 'conditions'
+        )
+
+        widgets = {
+            'description': SummernoteWidget()
+        }
 
 
 class ReviewForm(forms.ModelForm):

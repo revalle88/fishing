@@ -22,7 +22,7 @@ function init () {
         {% endfor %}
         {% for pound in pounds %}
         .add(new ymaps.Placemark([parseFloat("{{pound.lat}}".replace(",",".")), parseFloat("{{pound.lang}}".replace(",","."))], {
-            balloonContent: "Hello! {{pound.name}}"
+            balloonContent: "<a href = {% url 'pound_show' pound.id %}>инфо</a>"
         }, {
             preset: 'islands#circleDotIcon',
             iconColor: 'green'
@@ -41,7 +41,8 @@ function init () {
         document.getElementById('new_point').style.display = 'block';
         if (!myMap.balloon.isOpen()) {
             var coords = e.get('coords');
-            var myurl = "{% url 'review_new' %}"+"?lat="+coords[0]+"&lang="+coords[1]
+            var myurl = "{% url 'review_new' %}"+"?lat="+coords[0]+"&lang="+coords[1];
+            var new_pound_url = "{% url 'pound_new' %}"+"?lat="+coords[0]+"&lang="+coords[1];
 
             myMap.balloon.open(coords, {
                 contentHeader:'Событие!',
@@ -50,7 +51,7 @@ function init () {
                     coords[0].toPrecision(6),
                     coords[1].toPrecision(6)
                     ].join(', ') + '</p>',
-                contentFooter: "<a href="+myurl+">add point</a>"
+                contentFooter: "<a href="+myurl+">add point</a><br><a href="+new_pound_url+">add pound</a>"
             });
         }
         else {

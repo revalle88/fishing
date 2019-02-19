@@ -29,6 +29,12 @@ def pound_list(request):
     return render(request, 'app/pound_list.html', {"pounds": pounds})
 
 
+def pound_show(request, id):
+    pound = Pound.objects.filter(id=id)[0]
+    point = {"lat": pound.lat, "lang": pound.lang}
+    return render(request, 'app/pound_details.html', {"pound": pound, "point": point})
+
+
 def pound_new(request):
     if request.method == "POST":
         form = PoundForm(request.POST)
@@ -38,7 +44,9 @@ def pound_new(request):
             pound.save()
             return redirect('pounds')
     else:
-        form = PoundForm()
+        lat = request.GET.get('lat', 'lat none')
+        lang = request.GET.get('lang', 'lang none')
+        form = PoundForm(initial={'lat': lat, 'lang': lang})
         return render(request, 'app/pound_edit.html', {'form': form})
 
 
@@ -66,13 +74,14 @@ def review_new(request):
 def review_show(request, id):
     print(id)
     review = Review.objects.filter(id=id)[0]
-    r_id = request.GET.get('lat', 'lat none')
     resp = urllib.urlopen("https://api.darksky.net/forecast/caf0208379875df865f2185f5246bf48/53.8267,45.4233?units = auto").read()
     resp_jsonified = json.loads(resp)
     print(resp_jsonified.get('currently')['temperature'])
     weather = resp_jsonified.get('currently')
-    print(review.lat)
-    return render(request, 'app/review_show.html', {'review': review, 'weather': weather})
+    point = {"lat": review.lat, "lang": review.lang}
+    return render(
+        request, 'app/review_show.html', {'review': review, 'weather': weather, "point": point}
+    )
 
 
 def fishes_list(request):

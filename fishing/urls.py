@@ -18,6 +18,9 @@ from django.contrib import admin
 from .views import login, sample_api
 from .routers import router
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/login', login),
@@ -26,4 +29,8 @@ urlpatterns = [
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'', include('app.urls')),
     url(r'^social/', include('social_django.urls')),
+    url(r'^summernote/', include('django_summernote.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,12 +1,9 @@
 <script>
 ymaps.ready(init);
 var myMap;
-var a = "{% url 'pounds' %}";
 function init () {
-    var lat = parseFloat("{{review.lat}}".replace(",","."));
-    var lang = parseFloat("{{review.lang}}".replace(",","."));
-    console.log(lat);
-    console.log(lang);
+    var lat = parseFloat("{{point.lat}}".replace(",","."));
+    var lang = parseFloat("{{point.lang}}".replace(",","."));
     myMap = new ymaps.Map("map1", {
         center: [lat, lang], // Углич
         zoom: 11
