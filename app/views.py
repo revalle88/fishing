@@ -7,7 +7,7 @@ from .forms import PoundForm, ReviewForm
 
 from django.shortcuts import redirect
 
-import urllib
+import urllib.request
 import json
 
 
@@ -75,7 +75,9 @@ def review_new(request):
 def review_show(request, id):
     print(id)
     review = Review.objects.filter(id=id)[0]
-    resp = urllib.urlopen("https://api.darksky.net/forecast/caf0208379875df865f2185f5246bf48/53.8267,45.4233?units = auto").read()
+    with urllib.request.urlopen("https://api.darksky.net/forecast/caf0208379875df865f2185f5246bf48/53.8267,45.4233?units=auto") as url:
+        resp = url.read()
+    print(resp)
     resp_jsonified = json.loads(resp)
     print(resp_jsonified.get('currently')['temperature'])
     weather = resp_jsonified.get('currently')
