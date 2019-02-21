@@ -8,15 +8,11 @@
 {% endblock %}
 
 {% block content %}
-IT WORKS
-    console.log({{review.lat}});
-{{review.lat}}
-{{review.lang}}
 <h3>Review: </h3>
 <div>{{review.content}}</div>
 <div class = "weather">
     <li>temperature: {{weather.temperature}} C</li>
-    <li>{{weather.precipType}}</li>
+    <li>Осадки: {{weather.precipType}} </li>
     <li>скорость ветра: {{weather.windSpeed}}</li>
 </div>
 <div id="map1"></div>
