@@ -5,7 +5,7 @@
     <ul class = "list-group">
     {% for article in articles %}
         <a href = "{% url 'article_show' article.id %}">
-            <li class = "list-group-item"><img src = "{{article.picture.url}}" class = "fish_icon">
+            <li class = "list-group-item"><img src = "{{article.picture.url}}" class = "blog_list_picture">
                 {{article.name}}<br>{{article.published_date}}
             </li>
         </a>
