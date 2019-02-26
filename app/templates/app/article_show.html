@@ -1,0 +1,14 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <p>Пост:</p>
+
+
+        <div>
+            <p>{{article.name}}</p>
+            <img src = "{{article.picture.url}}" class = "fish_icon"><br>
+            <div>{{article.content|safe}}</div>
+        </div>
+
+
+{% endblock %}

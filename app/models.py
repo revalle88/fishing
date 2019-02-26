@@ -53,3 +53,31 @@ class Review(models.Model):
     def __unicode__(self):
         return str(self.id)
 
+
+class Tag(models.Model):
+    name = models.CharField(max_length=100)
+
+
+class Article(models.Model):
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    created_date = models.DateTimeField(
+        default=timezone.now)
+    published_date = models.DateTimeField(
+        default=timezone.now)
+    published = models.BooleanField(default=True)
+    name = models.CharField(max_length=200)
+    content = models.TextField(blank=True, null=True)
+    picture = models.ImageField(upload_to='blog')
+    tags = models.ManyToManyField(Tag)
+
+    def __unicode__(self):
+        return str(self.name)
+
+
+
+
+
+
+
+
+

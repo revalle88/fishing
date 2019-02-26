@@ -2,7 +2,9 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import Pound, Fish, Review
+from .models import Pound, Fish, Review, Tag, Article
+
+from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
 
@@ -10,3 +12,11 @@ from .models import Pound, Fish, Review
 admin.site.register(Pound)
 admin.site.register(Fish)
 admin.site.register(Review)
+admin.site.register(Tag)
+
+
+class ArticleAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
+    summernote_fields = 'content'
+
+
+admin.site.register(Article, ArticleAdmin)

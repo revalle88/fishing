@@ -1,0 +1,14 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <p>Blog:</p>
+    <ul class = "list-group">
+    {% for article in articles %}
+        <a href = "{% url 'article_show' article.id %}">
+            <li class = "list-group-item"><img src = "{{article.picture.url}}" class = "fish_icon">
+                {{article.name}}<br>{{article.published_date}}
+            </li>
+        </a>
+    {% endfor %}
+    </ul>
+{% endblock %}
