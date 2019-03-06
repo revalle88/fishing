@@ -101,6 +101,19 @@ DATABASES = {
     }
 }
 
+if not DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'prod_db',
+            'USER': 'prod_user',
+            'PASSWORD': 'dreamlord88',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    }
+
+
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = '6857493'
