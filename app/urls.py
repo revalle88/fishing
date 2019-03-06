@@ -16,6 +16,7 @@ urlpatterns = [
     # url(r'^reviews/(?P<id>\d+)/', views.review_show, name='review_show'),
     # url(r'^pounds/(?P<id>\d+)/', views.pound_show, name='pound_show'),
     url(r'^blog/$', views.article_list, name='articles'),
+    path("blog/category/<str:slug>/", views.blog_category_list, name="blog_category_list"),
     path("pounds/<int:id>/", views.pound_show, name='pound_show'),
     path("reviews/<int:id>/", views.review_show, name='review_show'),
     path("articles/<int:id>/", views.article_show, name='article_show'),

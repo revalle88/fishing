@@ -1,6 +1,17 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
+<ul class="menu-main">
+    <li><a href ="{% url 'articles' %}">Все</a></li>
+    {% for category in categories %}
+        <li>
+            <a href = "{% url 'blog_category_list' category.slug %}">{{category.name}}</a>
+        </li>
+
+    {% endfor %}
+</ul>
+
+
     <p>Blog:</p>
     <ul class = "list-group">
     {% for article in articles %}

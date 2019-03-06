@@ -58,6 +58,11 @@ class Tag(models.Model):
     name = models.CharField(max_length=100)
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    slug = models.CharField(max_length=100)
+
+
 class Article(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     created_date = models.DateTimeField(
@@ -69,6 +74,7 @@ class Article(models.Model):
     content = models.TextField(blank=True, null=True)
     picture = models.ImageField(upload_to='blog')
     tags = models.ManyToManyField(Tag)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
 
     def __unicode__(self):
         return str(self.name)

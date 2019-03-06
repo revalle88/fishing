@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from .models import Pound, Review, Fish, Article
+from .models import Pound, Review, Fish, Article, Category
 from .forms import PoundForm, ReviewForm
 
 from django.shortcuts import redirect
@@ -98,8 +98,22 @@ def fish_details(request, id):
 
 
 def article_list(request):
+    categories = Category.objects.all()
     articles = Article.objects.all()
-    return render(request, 'app/article_list.html', {"articles": articles})
+    return render(
+        request, 'app/article_list.html',
+        {"articles": articles, "categories": categories}
+    )
+
+
+def blog_category_list(request, slug):
+    categories = Category.objects.all()
+    current_category = Category.objects.filter(slug=slug)[0]
+    articles = Article.objects.filter(category=current_category)
+    return render(
+        request, 'app/article_list.html',
+        {"articles": articles, "categories": categories}
+    )
 
 
 def article_show(request, id):
