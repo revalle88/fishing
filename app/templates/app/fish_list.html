@@ -1,11 +1,11 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
-    <p>FIsh list:</p>
+    <p>Рыба:</p>
     <ul class = "list-group">
     {% for fish in fishes %}
         <a href = "{% url 'fish_details' fish.id %}">
-            <li class = "list-group-item"><img src = "{{fish.picture.url}}" class = "fish_icon">
+            <li class = "list-group-item"><img src = "{{fish.picture.url}}" class = "fish_icon_medium">
                 {{fish.name}}<br>{{fish.short_desc}}
             </li>
         </a>
