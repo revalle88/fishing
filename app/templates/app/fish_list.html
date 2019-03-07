@@ -6,7 +6,7 @@
     {% for fish in fishes %}
         <a href = "{% url 'fish_details' fish.id %}">
             <li class = "list-group-item"><img src = "{{fish.picture.url}}" class = "fish_icon">
-                {{fish.name}}<br>{{fish.description}}
+                {{fish.name}}<br>{{fish.short_desc}}
             </li>
         </a>
     {% endfor %}

@@ -25,7 +25,7 @@ SECRET_KEY = '5z$2@b*v-)$69n0f5r9%q4sr(0q!ghr4g1xh34y(a5b=tpqu%z'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
-DEBUG = True
+#DEBUG = True
 ALLOWED_HOSTS = ['young-refuge-68970.herokuapp.com', '127.0.0.1', '94.242.59.230']
 
 
@@ -113,16 +113,16 @@ if not DEBUG:
         }
     }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'prod_db',
-        'USER': 'prod_user',
-        'PASSWORD': 'dreamlord88',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'prod_db',
+#         'USER': 'prod_user',
+#         'PASSWORD': 'dreamlord88',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 
 
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True

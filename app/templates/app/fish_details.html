@@ -5,7 +5,10 @@
 
 
         <div>
-            <img src = "{{fish.picture.url}}" class = "fish_icon">{{fish.name}}<br>{{fish.description}}
+            <img src = "{{fish.picture.url}}" class = "fish_icon">{{fish.name}}
+        </div>
+        <div>
+            {{fish.description|safe}}
         </div>
 
 

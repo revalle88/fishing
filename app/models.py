@@ -6,6 +6,7 @@ from django.db import models
 
 class Fish(models.Model):
     name = models.CharField(max_length=200)
+    short_desc = models.CharField(max_length=500, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     picture = models.ImageField(upload_to='fishes', default='fishes/no-img.jpg')
 
@@ -14,6 +15,10 @@ class Fish(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Рыба'
+        verbose_name_plural = 'Рыбы'
 
 
 # Create your models here.
@@ -36,6 +41,10 @@ class Pound(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Пруд'
+        verbose_name_plural = 'Пруды'
+
 
 class Review(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -53,14 +62,26 @@ class Review(models.Model):
     def __unicode__(self):
         return str(self.id)
 
+    class Meta:
+        verbose_name = 'Обзор'
+        verbose_name_plural = 'Обзоры'
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = 'Тэг'
+        verbose_name_plural = 'Тэги'
 
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
 
 
 class Article(models.Model):
@@ -79,6 +100,10 @@ class Article(models.Model):
     def __unicode__(self):
         return str(self.name)
 
+
+    class Meta:
+        verbose_name = 'Статья'
+        verbose_name_plural = 'Статьи'
 
 
 
