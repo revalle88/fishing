@@ -46,6 +46,13 @@ font-size: 14px;
 text-decoration: none;
 }
 
+.blog_menu_item{
+color: #000000;
+font-family: "Open Sans", Arial, Helvetica, Sans-Serif;
+font-size: 12px;
+text-decoration: none;
+}
+
 .fish_icon {
     width: 65px;
     height: 65px;
@@ -61,4 +68,10 @@ text-decoration: none;
   -webkit-columns: 4;
   -moz-columns: 4;
   list-style-type:none
+}
+
+
+.footer-tab{
+    background: #161414;
+    color: #fff;
 }

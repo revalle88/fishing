@@ -1,15 +1,21 @@
 {% extends 'app/base.html' %}
 
+{% block page_title %}
+    Блог
+{% endblock %}
+
 {% block content %}
-<ul class="menu-main">
-    <li><a href ="{% url 'articles' %}">Все</a></li>
+<nav class="navbar navbar-expand-sm">
+<ul class="navbar-nav w-100 justify-content-around">
+    <li class="nav-item"><a href ="{% url 'articles' %}" class="blog_menu_item">Все</a></li>
     {% for category in categories %}
-        <li>
-            <a href = "{% url 'blog_category_list' category.slug %}">{{category.name}}</a>
+        <li class="nav-item">
+            <a href = "{% url 'blog_category_list' category.slug %}" class="blog_menu_item">{{category.name}}</a>
         </li>
 
     {% endfor %}
 </ul>
+</nav>
 
 
     <p>Blog:</p>

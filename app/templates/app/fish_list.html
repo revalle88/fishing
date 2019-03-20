@@ -1,7 +1,10 @@
 {% extends 'app/base.html' %}
 
+{% block page_title %}
+    Рыба
+{% endblock %}
+
 {% block content %}
-    <p>Рыба:</p>
     <ul class = "list-group">
     {% for fish in fishes %}
         <a href = "{% url 'fish_details' fish.id %}">
