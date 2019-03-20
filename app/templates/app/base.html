@@ -5,39 +5,88 @@
 {% block header %}
 {% endblock %}
 <body>
-<div class = "container-fluid">
+    <div class="blog-masthead">
+      <div class="container py-1">
+          <div class ="row">
+              <div class = "col-4">
+                <a class = "header_link" href="mailto:revalle88@gmail.com">связаться с нами</a>
+              </div>
+              <div class = "col">
 
-        <div id = "main_header_top_wrapper">
-            <div id = "main_header_top">
-                <div id="main_header_top_support"><a class = "header_link" href="mailto:revalle88@gmail.com">связаться с нами</a></div>
-                <div id = "main_header_top_accounts">
-                    {% if user.is_authenticated %}
+              </div>
+              <div class = "col-4">
+                 {% if user.is_authenticated %}
                         Здравствуй, {{ user.username }}!
                         <a href="{% url 'logout' %}" class = "header_link">Выйти</a>
                     {% else %}
                         <a href="{% url 'login' %}" class = "header_link">Войти</a>
-                    {% endif %}
-                 </div>
-            </div>
-        </div>
-    <div class = "main_header_wrapper">
-        <div class = "main_header">
-            <a href = "{% url 'home' %}" class = "logo_text">GeoРЫБА :</a>
-            <div class = "main_menu">
-                <a href = "{% url 'fishes' %}" class = "main_menu_item">РЫБА  </a>
-                <a href = "{% url 'pounds' %}" class = "main_menu_item">Водоемы</a>
-                <a href = "{% url 'articles' %}" class = "main_menu_item">Блог</a>
-                <a href = '#' class = "main_menu_item">Точки</a>
-                <a href = '#' class = "main_menu_item">Карта</a>
-            </div>
-        </div>
+                 {% endif %}
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="main-menu-tab">
+      <div class="container py-2">
+          <div class ="row">
+              <div class = "col-4 py-2">
+                  <a href = "{% url 'home' %}" class = "logo_text">GeoРЫБА :</a>
+              </div>
+              <div class = "col-8">
+                    <nav class="navbar navbar-expand-sm">
+                        <!--<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+                            <ul class="navbar-nav w-100 justify-content-around">
+                              <li class="nav-item active">
+                                <a href = "{% url 'fishes' %}" class = "main_menu_item">РЫБА  </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href = "{% url 'pounds' %}" class = "main_menu_item">Водоемы</a>
+                              </li>
+                              <li class="nav-item">
+                                <a href = "{% url 'articles' %}" class = "main_menu_item">Блог</a>
+                              </li>
+                              <li class="nav-item">
+                                <a href = '#' class = "main_menu_item">Точки</a>
+                              </li>
+                              <li class="nav-item">
+                                <a href = '#' class = "main_menu_item">Карта</a>
+                              </li>
+
+                            </ul>
+                         <!--</div>-->
+                    </nav>
+              </div>
+
+          </div>
+      </div>
     </div>
 
-        <div id = map_wrapper>
-            {% block map %}
-            {% endblock %}
 
+    <div id = map_wrapper>
+        {% block map %}
+        {% endblock %}
+
+    </div>
+
+
+    <div class="breadcrumb-tab">
+        <div class="container py-2">
+            <div class ="row">
+              <div class = "col-2">
+                БЛОГ
+              </div>
+              <div class = "col">
+
+              </div>
+              <div class = "col-2">
+                статья
+              </div>
+            </div>
         </div>
+
+    </div>
+
+
+
 
 
     <div class = 'container'>
@@ -48,30 +97,9 @@
     </div>
 
 
-    <footer class="main-footer">
-  <div class="main-footer__stroke"></div>
-  <div class="main-footer__layout">
-    <div class="main-footer__row2-items">
-      <div class="main-footer__contacts"><span class="main-footer__contact"><a class="main-footer__link" href="mailto:info@openweathermap.org">CONTACT US</a></span>
-        <div class="main-footer__socials"><a class="icon-social1" href="https://www.facebook.com/groups/270748973021342" title="facebook" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a><a class="icon-social1" href="https://twitter.com/OpenWeatherMap" title="twitter" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a><a class="icon-social1" href="https://www.linkedin.com/company/9816754" title="linkedin" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a><a class="icon-social1" href="https://www.instagram.com/openweathermap/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a><a class="icon-social1" href="https://t.me/openweathermap" target="_blank"><i class="fa fa-telegram" aria-hidden="true"></i></a><a class="icon-social1" href="https://github.com/search?q=openweathermap&amp;ref=cmdform" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></div>
-      </div>
-    </div>
-    <div class="main-footer__copyright">
-       <a class="main-footer__copyright-link" href="/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf" target="_blank">Terms and conditions of sale</a>
-       |
-       <a class="main-footer__copyright-link" href="/privacy-policy">Privacy policy</a>
-       |
-       <a class="main-footer__copyright-link" href="/storage/app/media/Terms/Openweather_website_terms_and_conditions_of_use.pdf" target="_blank">Websites terms and conditions of use</a>
-       |
-       <a class="main-footer__copyright-link" href="/team">Our team</a>
-    </div>
-    <div class="main-footer__copyright">© 2012 —<span id="template-current-year">2019</span>
-       OpenWeather ® All rights reserved.
-    </div>
-  </div>
-    </footer>
 
-</div>
+
+
 </body>
 
 </html>

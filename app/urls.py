@@ -21,4 +21,5 @@ urlpatterns = [
     path("reviews/<int:id>/", views.review_show, name='review_show'),
     path("articles/<int:id>/", views.article_show, name='article_show'),
     url(r'^$', views.home, name='home'),
+    url(r'^test/$', views.bootstrap_test, name='bootstrap_test'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
