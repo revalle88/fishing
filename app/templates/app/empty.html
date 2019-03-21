@@ -1,0 +1,15 @@
+{% load static %}
+<html>
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% block header %}
+{% endblock %}
+<body>
+<div>
+    <div class="container py-5 main-square text-center">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>
