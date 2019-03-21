@@ -18,14 +18,21 @@
 </nav>
 
 
-    <p>Blog:</p>
-    <ul class = "list-group">
+<div class = "row justify-content-around">
     {% for article in articles %}
+    <div class="col-lg-3 col-md-2 col-xs-1 py-2">
         <a href = "{% url 'article_show' article.id %}">
-            <li class = "list-group-item"><img src = "{{article.picture.url}}" class = "blog_list_picture">
-                {{article.name}}<br>{{article.published_date}}
-            </li>
+            <div>
+                <img src = "{{article.picture.url}}" class = "blog_list_picture">
+            </div>
+            <div>{{article.name}}</div>
+            <div>{{article.published_date}}</div>
+
+
         </a>
+    </div>
+
+
     {% endfor %}
-    </ul>
+    </div>
 {% endblock %}

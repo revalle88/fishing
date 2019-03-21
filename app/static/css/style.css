@@ -98,3 +98,7 @@ text-decoration: none;
     color: rgba(0,0,0,.68);
     border-color: rgba(0,0,0,.54);
 }
+
+.blog_list_picture{
+    height: 70px;
+}
