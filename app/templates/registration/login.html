@@ -19,6 +19,7 @@
 <h5>Войдите, чтобы иметь возможность добавлять точки на карту и оставлять отызвы</h5>
 <div>Зайти через соц. сети:<br>
     <a href="/social/login/vk-oauth2"><img src='{% static "images/social/vk.png" %}' class="social_ic"></a>
+    <a href="{% url 'social:begin' 'google-oauth2' %}">google<img src='{% static "images/social/google.png" %}' class="social_ic"></a>
 </div>
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}

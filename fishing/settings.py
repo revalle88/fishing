@@ -130,6 +130,9 @@ SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 SOCIAL_AUTH_VK_OAUTH2_KEY = '6857493'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = 'FFLxC4mBIzfudaDGqUOA'
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='385275237268-mjv33ind8t7ql3kgg1m7q8ag28snldok.apps.googleusercontent.com'  #Paste CLient Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'jrRVvQ-mJT73vtES-PXAjvoh' #Paste Secret Key
+
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
@@ -182,6 +185,9 @@ USE_TZ = True
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
+    'social_core.backends.google.GoogleOpenId',  # for Google authentication
+    'social_core.backends.google.GoogleOAuth2',  # for Google authentication
 )
 
 
