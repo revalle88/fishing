@@ -20,12 +20,13 @@
 
 <div class = "row justify-content-around">
     {% for article in articles %}
-    <div class="col-lg-3 col-md-2 col-xs-1 py-2">
+    <div class="col-lg-4 col-md-6 col-xs-12 py-2">
         <a href = "{% url 'article_show' article.id %}">
             <div>
                 <img src = "{{article.picture.url}}" class = "blog_list_picture">
             </div>
             <div>{{article.name}}</div>
+            <div>{{article.description}}</div>
             <div>{{article.published_date}}</div>
 
 

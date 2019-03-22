@@ -92,6 +92,7 @@ class Article(models.Model):
         default=timezone.now)
     published = models.BooleanField(default=True)
     name = models.CharField(max_length=200)
+    description = models.CharField(max_length=500, default='')
     content = models.TextField(blank=True, null=True)
     picture = models.ImageField(upload_to='blog')
     tags = models.ManyToManyField(Tag)
