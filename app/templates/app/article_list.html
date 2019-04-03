@@ -22,8 +22,8 @@
     {% for article in articles %}
     <div class="col-lg-4 col-md-6 col-xs-12 py-2 blog_article">
         <a href = "{% url 'article_show' article.id %}">
-            <div>
-                <img src = "{{article.picture.url}}" class = "blog_list_picture">
+            <div class = "blog-list-image" style="background-image: url({{article.picture.url}});">
+               <!--<img src = "{{article.picture.url}}" class = "blog_list_picture">-->
             </div>
             <div class="article-name py-2">{{article.name}}</div>
             <div class = "short-descr">{{article.description}}</div>
