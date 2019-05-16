@@ -16,5 +16,14 @@
     <li>скорость ветра: {{weather.windSpeed}}</li>
 </div>
 <div id="map1"></div>
+<div>
+    {% for fish in fish_caught %}
+        <a href = "{% url 'fish_details' fish.id %}">
+            <li class = "list-group-item"><img src = "{{fish.picture.url}}" class = "fish_icon_medium">
+                {{fish.name}}
+            </li>
+        </a>
+    {% endfor %}
+</div>
 
 {% endblock %}

@@ -61,6 +61,7 @@ def review_new(request):
             review = form.save(commit=False)
             review.author = request.user
             review.save()
+            form.save_m2m()
             return redirect('pounds')
     else:
         lat = request.GET.get('lat', 'lat none')
@@ -82,8 +83,10 @@ def review_show(request, id):
     print(resp_jsonified.get('currently')['temperature'])
     weather = resp_jsonified.get('currently')
     point = {"lat": review.lat, "lang": review.lang}
+    fish_caught = review.fish_caught.all()
+    print(fish_caught)
     return render(
-        request, 'app/review_show.html', {'review': review, 'weather': weather, "point": point}
+        request, 'app/review_show.html', {'review': review, 'weather': weather, "point": point, 'fish_caught': fish_caught}
     )
 
 
