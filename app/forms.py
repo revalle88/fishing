@@ -20,7 +20,8 @@ class PoundForm(forms.ModelForm):
 
 class ReviewForm(forms.ModelForm):
 
-    pound = forms.ModelChoiceField(queryset=Pound.objects.all(), required=False)
+    # pound = forms.ModelChoiceField(queryset=Pound.objects.all(), required=False)
+    rating = forms.IntegerField(initial=5, min_value=1, max_value=5)
 
     class Meta:
         model = Review
@@ -30,6 +31,7 @@ class ReviewForm(forms.ModelForm):
             'pound': "к какому водоему относится: ",
             'content': "Описание",
             'fish_caught': "Рыба поймана",
+            'rating': "Рейтинг"
         }
 
     def __init__(self, *args, **kwargs):

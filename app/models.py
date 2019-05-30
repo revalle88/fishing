@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
 from django.db import models
 
@@ -55,7 +57,7 @@ class Review(models.Model):
             default=timezone.now)
     fishing_date = models.DateTimeField(
             default=timezone.now)
-    rating = models.IntegerField()
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     lang = models.FloatField(default=50)
     lat = models.FloatField(default=50)
 

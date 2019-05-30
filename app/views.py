@@ -57,7 +57,7 @@ def review_new(request):
     if request.method == "POST":
         print("!!!!POST")
         form = ReviewForm(request.POST)
-        print("Get FOrm")
+
         if form.is_valid():
             print("Valid")
             review = form.save(commit=False)
