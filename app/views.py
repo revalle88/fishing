@@ -52,6 +52,8 @@ def pound_new(request):
 
 
 def review_new(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     if request.method == "POST":
         print("!!!!POST")
         form = ReviewForm(request.POST)
