@@ -69,9 +69,6 @@ def review_new(request):
         lat = request.GET.get('lat', 'lat none')
         lang = request.GET.get('lang', 'lang none')
         form = ReviewForm(initial={'lat': lat, 'lang': lang})
-
-        print(request.GET.get('lang', 'lang none'))
-        print(request.GET.get('lat', 'lat none'))
         return render(request, 'app/review_add.html', {'form': form})
 
 
