@@ -109,6 +109,19 @@ class Article(models.Model):
         verbose_name_plural = 'Статьи'
 
 
+def get_image_filename(instance, filename):
+    slug = instance.review.id
+    return "review_images/%s-%s" % (slug, filename)
+
+
+class Images(models.Model):
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=get_image_filename,
+                              verbose_name='Image')
+
+
+
+
 
 
 

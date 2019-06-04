@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.forms import modelformset_factory
 from django.shortcuts import render
-from .models import Pound, Review, Fish, Article, Category
-from .forms import PoundForm, ReviewForm
+
+from .models import Pound, Review, Fish, Article, Category, Images
+from .forms import PoundForm, ReviewForm, ImageForm
 
 from django.shortcuts import redirect
 
@@ -54,22 +56,35 @@ def pound_new(request):
 def review_new(request):
     if not request.user.is_authenticated:
         return redirect('login')
+
+    ImageFormSet = modelformset_factory(Images,
+                                        form=ImageForm, extra=3)
+
     if request.method == "POST":
         print("!!!!POST")
         form = ReviewForm(request.POST)
 
-        if form.is_valid():
+        formset = ImageFormSet(request.POST, request.FILES,
+                               queryset=Images.objects.none())
+
+        if form.is_valid() and formset.is_valid():
             print("Valid")
             review = form.save(commit=False)
             review.author = request.user
             review.save()
             form.save_m2m()
+            for image_form in formset.cleaned_data:
+                if image_form:
+                    image = image_form['image']
+                    photo = Images(review=review, image=image)
+                    photo.save()
             return redirect('pounds')
     else:
         lat = request.GET.get('lat', 'lat none')
         lang = request.GET.get('lang', 'lang none')
         form = ReviewForm(initial={'lat': lat, 'lang': lang})
-        return render(request, 'app/review_add.html', {'form': form})
+        formset = ImageFormSet(queryset=Images.objects.none())
+        return render(request, 'app/review_add.html', {'form': form, 'formset': formset})
 
 
 def review_show(request, id):
