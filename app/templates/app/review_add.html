@@ -6,4 +6,11 @@
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
+
+<!-- Upload Photos -->
+
+    <form id="add-photos" action="{% url 'ajax_photo_upload_view' 1 %}" class="dropzone">
+        {% csrf_token %}
+    </form>
+
 {% endblock %}

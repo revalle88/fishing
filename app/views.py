@@ -1,8 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from braces.views import (
+    AjaxResponseMixin,
+    JSONResponseMixin,
+    LoginRequiredMixin,
+    SuperuserRequiredMixin,
+)
+
 from django.shortcuts import render
-from .models import Pound, Review, Fish, Article, Category
+from .models import Pound, Review, Fish, Article, Category, Photo
 from .forms import PoundForm, ReviewForm
 
 from django.shortcuts import redirect
@@ -13,7 +20,7 @@ import json
 
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-from django.views import generic
+from django.views import generic, View
 
 
 # Create your views here.
@@ -131,3 +138,30 @@ class SignUp(generic.CreateView):
 
 def bootstrap_test(request):
     return render(request, 'app/bootstrap_test.html')
+
+
+class AjaxPhotoUploadView(
+    LoginRequiredMixin,
+    SuperuserRequiredMixin,
+    JSONResponseMixin,
+    AjaxResponseMixin,
+    View
+):
+    """
+    View for uploading photos via AJAX.
+    """
+    def post_ajax(self, request, *args, **kwargs):
+        try:
+            review = Review.objects.get(pk=kwargs.get('pk'))
+        except Review.DoesNotExist:
+            error_dict = {'message': 'Review not found.'}
+            return self.render_json_response(error_dict, status=404)
+
+        uploaded_file = request.FILES['file']
+        Photo.objects.create(album=review, file=uploaded_file)
+
+        response_dict = {
+            'message': 'File uploaded successfully!',
+        }
+
+        return self.render_json_response(response_dict, status=200)
