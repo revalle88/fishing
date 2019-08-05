@@ -26,7 +26,7 @@ SECRET_KEY = '5z$2@b*v-)$69n0f5r9%q4sr(0q!ghr4g1xh34y(a5b=tpqu%z'
 
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
 DEBUG = True
-ALLOWED_HOSTS = ['young-refuge-68970.herokuapp.com', '127.0.0.1', '94.242.59.230']
+ALLOWED_HOSTS = ['young-refuge-68970.herokuapp.com', '127.0.0.1', '94.242.59.230', '0.0.0.0']
 
 
 # Application definition
@@ -93,8 +93,8 @@ WSGI_APPLICATION = 'fishing.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'fihsing',
-        'USER': '',
+        'NAME': 'postgres',
+        'USER': 'postgres',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '5432',

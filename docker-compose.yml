@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  db:
+    image: postgres
+  geofishing:
+    build: .
+    container_name: geofishing
+    ports:
+      - "6556:6556"
+    command: gunicorn fishing.wsgi:application --bind 0.0.0.0:6556 --workers 3
+    depends_on:
+      - db
+    restart: always
+    stdin_open: true
+    tty: true
