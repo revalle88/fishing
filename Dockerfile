@@ -9,6 +9,9 @@ ENV PYTHONDONTWRITEBYTECODE yes
 WORKDIR $HOME
 
 COPY requirements.txt .
+COPY manage.py .
+COPY entry_point.sh .
 RUN pip install --no-cache-dir -r requirements.txt && rm requirements.txt
 COPY fishing fishing
 COPY app app
+RUN chmod +x entry_point.sh
