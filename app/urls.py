@@ -22,9 +22,4 @@ urlpatterns = [
     path("articles/<int:id>/", views.article_show, name='article_show'),
     url(r'^$', views.home, name='home'),
     url(r'^test/$', views.bootstrap_test, name='bootstrap_test'),
-    url(
-        regex=r'^(?P<pk>\d+)/ajax-upload/$',
-        view=views.AjaxPhotoUploadView.as_view(),
-        name='ajax_photo_upload_view',
-        ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
