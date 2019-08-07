@@ -69,6 +69,12 @@ class Review(models.Model):
         verbose_name_plural = 'Обзоры'
 
 
+class Photo(models.Model):
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    file = models.ImageField(upload_to="tmp_pics")
+    description = models.TextField(blank=True, null=True)
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=100)
 
