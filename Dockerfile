@@ -11,6 +11,7 @@ WORKDIR $HOME
 COPY requirements.txt .
 COPY manage.py .
 COPY entry_point.sh .
+RUN apt-get update && apt-get install -y wait-for-it --no-install-recommends
 RUN pip install --no-cache-dir -r requirements.txt && rm requirements.txt
 COPY fishing fishing
 COPY app app
