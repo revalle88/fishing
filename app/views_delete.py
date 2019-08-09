@@ -114,28 +114,7 @@ def fish_details(request, id):
     return render(request, 'app/fish_details.html', {"fish": fish})
 
 
-def article_list(request):
-    categories = Category.objects.all()
-    articles = Article.objects.all()
-    return render(
-        request, 'app/article_list.html',
-        {"articles": articles, "categories": categories}
-    )
 
-
-def blog_category_list(request, slug):
-    categories = Category.objects.all()
-    current_category = Category.objects.filter(slug=slug)[0]
-    articles = Article.objects.filter(category=current_category)
-    return render(
-        request, 'app/article_list.html',
-        {"articles": articles, "categories": categories}
-    )
-
-
-def article_show(request, id):
-    article = Article.objects.filter(id=id)[0]
-    return render(request, 'app/article_show.html', {"article": article})
 
 
 class SignUp(generic.CreateView):
