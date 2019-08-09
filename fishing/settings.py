@@ -42,11 +42,15 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'social_django',
     'app',
+    'debug_toolbar',
 ]
 
 INSTALLED_APPS += ('django_summernote', )
 
+
+
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -56,6 +60,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+# if DEBUG:
+#     INSTALLED_APPS += ('debug_toolbar', )
+#     MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
 
 ROOT_URLCONF = 'fishing.urls'
 
@@ -209,6 +218,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -220,3 +230,16 @@ MEDIA_URL = '/media/'
 # DATABASES['default'].update(db_from_env)
 
 
+INTERNAL_IPS = [
+    '127.0.0.1',
+    '0.0.0.0',
+]
+
+
+def show_toolbar(request):
+    return True
+
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': show_toolbar,
+}

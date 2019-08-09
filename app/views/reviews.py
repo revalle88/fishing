@@ -60,5 +60,5 @@ def review_show(request, id):
     fish_caught = review.fish_caught.all()
     print(fish_caught)
     return render(
-        request, 'app/review_show.html', {'review': review, 'weather': weather, "point": point, 'fish_caught': fish_caught}
+        request, 'app/review_show.html', {'review': review, 'weather': weather, "point": point, 'fish_caught': fish_caught, 'images': review.images_set.all()}
     )

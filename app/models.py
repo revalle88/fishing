@@ -48,6 +48,11 @@ class Pound(models.Model):
         verbose_name_plural = 'Пруды'
 
 
+def get_image_filename(instance, filename):
+    slug = instance.review.id
+    return "review_images/%s-%s" % (slug, filename)
+
+
 class Review(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     pound = models.ForeignKey(Pound, on_delete=models.CASCADE, blank=True, null=True)
@@ -69,10 +74,10 @@ class Review(models.Model):
         verbose_name_plural = 'Обзоры'
 
 
-# class Photo(models.Model):
-#     review = models.ForeignKey(Review, on_delete=models.CASCADE)
-#     file = models.ImageField(upload_to="tmp_pics")
-#     description = models.TextField(blank=True, null=True)
+class Images(models.Model):
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='fishes',
+                              verbose_name='Image')
 
 
 class Tag(models.Model):
@@ -115,15 +120,9 @@ class Article(models.Model):
         verbose_name_plural = 'Статьи'
 
 
-def get_image_filename(instance, filename):
-    slug = instance.review.id
-    return "review_images/%s-%s" % (slug, filename)
 
 
-class Images(models.Model):
-    review = models.ForeignKey(Review, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=get_image_filename,
-                              verbose_name='Image')
+
 
 
 

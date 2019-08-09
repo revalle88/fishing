@@ -15,4 +15,5 @@ RUN apt-get update && apt-get install -y wait-for-it --no-install-recommends
 RUN pip install --no-cache-dir -r requirements.txt && rm requirements.txt
 COPY fishing fishing
 COPY app app
+RUN python manage.py collectstatic --noinput
 RUN chmod +x entry_point.sh
