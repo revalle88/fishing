@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import render
 
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
@@ -16,6 +17,20 @@ class BlogIndexPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full")
     ]
+
+    def serve(self, request):
+        # Get blogs
+        blogs = BlogPage.objects.child_of(self).live()
+
+        # Filter by tag
+        tag = request.GET.get('tag')
+        if tag:
+            blogs = blogs.filter(tags__name=tag)
+
+        return render(request, self.template, {
+            'page': self,
+            'blogs': blogs,
+        })
 
 
 class BlogPageTag(TaggedItemBase):

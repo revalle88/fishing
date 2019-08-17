@@ -1,10 +1,20 @@
-{% extends "blog/base.html" %}
+{% extends "app/base.html" %}
 
 {% load wagtailcore_tags %}
 
 {% block body_class %}template-blogpage{% endblock %}
 
+
 {% block content %}
+    {# Check if there are tags #}
+    {% if page.tags.count %}
+        <h1>Tags:</h1>
+        {% for tag in page.tags.all %}
+            {# Loop through all the existing tags #}
+            <a href="{{ self.get_parent.url }}?tag={{ tag.slug }}">{{ tag }}</a><br />
+        {% endfor %}
+    {% endif %}
+
     <h1>{{ page.title }}</h1>
     <p class="meta">{{ page.date }}</p>
 
