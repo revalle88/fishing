@@ -1,0 +1,110 @@
+{% load static %}
+<html>
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% block header %}
+{% endblock %}
+<body>
+    <div class="blog-masthead">
+      <div class="container py-1">
+          <div class ="row">
+              <div class = "col-4">
+                <a class = "header_link" href="mailto:revalle88@gmail.com">связаться с нами</a>
+              </div>
+              <div class = "col">
+
+              </div>
+              <div class = "col-4">
+                 {% if user.is_authenticated %}
+                        Здравствуй, {{ user.username }}!
+                        <a href="{% url 'logout' %}" class = "header_link">Выйти</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class = "header_link">Войти</a>
+                 {% endif %}
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="main-menu-tab">
+      <div class="container py-2">
+          <div class ="row">
+              <div class = "col-4 py-2">
+                  <a href = "{% url 'home' %}" class = "logo_text">GeoРЫБА:</a>
+              </div>
+              <div class = "col-8">
+                    <nav class="navbar navbar-expand-sm">
+                        <!--<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+                            <ul class="navbar-nav w-100 justify-content-around">
+                              <li class="nav-item active">
+                                <a href = "{% url 'fishes' %}" class = "main_menu_item">РЫБА  </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href = "{% url 'pounds' %}" class = "main_menu_item">Водоемы</a>
+                              </li>
+                              <li class="nav-item">
+                                <a href = "{% url 'articles' %}" class = "main_menu_item">Блог</a>
+                              </li>
+                              <li class="nav-item">
+                                <a href = '#' class = "main_menu_item">Точки</a>
+                              </li>
+                              <li class="nav-item">
+                                <a href = '#' class = "main_menu_item">Карта</a>
+                              </li>
+
+                            </ul>
+                         <!--</div>-->
+                    </nav>
+              </div>
+
+          </div>
+      </div>
+    </div>
+
+
+    <div id = map_wrapper>
+        {% block map %}
+        {% endblock %}
+
+    </div>
+
+
+    <div class="breadcrumb-tab">
+        <div class="container py-2">
+            <div class ="row">
+              <div class = "col-2">
+                {% block page_title %}
+                {% endblock %}
+              </div>
+              <div class = "col">
+
+              </div>
+              <div class = "col-2">
+
+              </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <div class = 'container'>
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+
+    <div class = "footer-tab">
+        <div class="container justify-content-center w-100 py-3">
+            GeoFishing ® All rights reserved.
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

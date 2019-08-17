@@ -14,6 +14,7 @@ services:
     volumes:
       - ./fishing:/app/fishing
       - ./app:/app/app
+      - ./blog:/app/blog
     ports:
       - "6556:6556"
 #    command: gunicorn fishing.wsgi:application --bind 0.0.0.0:6556 --workers 3

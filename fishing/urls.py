@@ -22,6 +22,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.documents import urls as wagtaildocs_urls
+from wagtail.core import urls as wagtail_urls
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -32,6 +36,9 @@ urlpatterns = [
     url(r'', include('app.urls')),
     url(r'^social/', include('social_django.urls')),
     url(r'^summernote/', include('django_summernote.urls')),
+    url(r'^cms/', include(wagtailadmin_urls)),
+    url(r'^documents/', include(wagtaildocs_urls)),
+    url(r'^pages/', include(wagtail_urls)),
 ]
 
 if settings.DEBUG:
