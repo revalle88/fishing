@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  db:
+    image: postgres
+    container_name: geofishing_db
+    env_file: .env
+
+  geofishing:
+    build: .
+    image: fishing_geofishing
+    container_name: geofishing
+    environment:
+      - DJANGO_DEBUG=True
+    volumes:
+      - ./fishing:/app/fishing
+      - ./app:/app/app
+    ports:
+      - "6556:6556"
+#    command: gunicorn fishing.wsgi:application --bind 0.0.0.0:6556 --workers 3
+    command: python manage.py runserver 0.0.0.0:6556
+    entrypoint:
+      - /app/entry_point.sh
+    depends_on:
+      - db
+    restart: always
+    stdin_open: true
+    tty: true

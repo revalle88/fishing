@@ -26,7 +26,7 @@ SECRET_KEY = '5z$2@b*v-)$69n0f5r9%q4sr(0q!ghr4g1xh34y(a5b=tpqu%z'
 
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
 # DEBUG = True
-ALLOWED_HOSTS = ['young-refuge-68970.herokuapp.com', '127.0.0.1', '94.242.59.230']
+ALLOWED_HOSTS = ['young-refuge-68970.herokuapp.com', '127.0.0.1', '94.242.59.230', '0.0.0.0']
 
 
 # Application definition
@@ -42,11 +42,15 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'social_django',
     'app',
+    'debug_toolbar',
 ]
 
 INSTALLED_APPS += ('django_summernote', )
 
+
+
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -56,6 +60,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+# if DEBUG:
+#     INSTALLED_APPS += ('debug_toolbar', )
+#     MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
 
 ROOT_URLCONF = 'fishing.urls'
 
@@ -88,15 +97,24 @@ WSGI_APPLICATION = 'fishing.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'fihsing',
+#         'USER': '',
+#         'PASSWORD': '',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'fihsing',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
+        'NAME': 'fishing',
+        'USER': 'fishing',
+        'PASSWORD': 'fishing',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
@@ -200,6 +218,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -211,3 +230,19 @@ MEDIA_URL = '/media/'
 # DATABASES['default'].update(db_from_env)
 
 
+INTERNAL_IPS = [
+    '127.0.0.1',
+    '0.0.0.0',
+]
+
+
+def show_toolbar(request):
+    if DEBUG:
+        return True
+    else:
+        return False
+
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': show_toolbar,
+}

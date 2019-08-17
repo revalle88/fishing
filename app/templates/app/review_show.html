@@ -26,4 +26,10 @@
     {% endfor %}
 </div>
 
+<div class = "photoes">
+<!--    {{review.images}}-->
+    {% for image in images %}
+        <img src = "{{image.image}}" class = "fish_icon_medium">
+    {% endfor %}
+</div>
 {% endblock %}

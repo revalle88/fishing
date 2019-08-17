@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 
-from .models import Pound, Review, Fish
+from .models import Pound, Review, Fish, Images
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 
@@ -42,5 +42,13 @@ class ReviewForm(forms.ModelForm):
         self.fields["lat"].widget = forms.widgets.HiddenInput()
         self.fields["lang"].widget = forms.widgets.HiddenInput()
         self.fields["fishing_date"].widget = forms.widgets.SelectDateWidget()
+
+
+class ImageForm(forms.ModelForm):
+    image = forms.ImageField(label='Image')
+
+    class Meta:
+        model = Images
+        fields = ('image', )
 
 
