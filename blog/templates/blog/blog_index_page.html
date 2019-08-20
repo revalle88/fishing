@@ -1,6 +1,6 @@
 {% extends "blog/base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-blogindexpage{% endblock %}
 
@@ -9,9 +9,13 @@
 
     <div class="intro">{{ page.intro|richtext }}</div>
 
-    {% for post in page.get_children %}
+    {% for post in posts %}
         <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
         {{ post.specific.intro }}
+
+            fasfasfdsafdsafsaf!!!
+            {% image post.main_image width-500 %}
+
         {{ post.specific.body|richtext }}
     {% endfor %}
 
