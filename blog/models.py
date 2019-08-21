@@ -77,9 +77,17 @@ class BlogCategory(models.Model):
         'wagtailimages.Image', null=True, blank=True,
         on_delete=models.SET_NULL, related_name='+'
     )
+    slug = models.SlugField(
+        verbose_name="slug",
+        allow_unicode=True,
+        max_length=255,
+        help_text='A slug to identify posts by this category',
+        blank=True,
+    )
 
     panels = [
         FieldPanel('name'),
+        FieldPanel('slug'),
         ImageChooserPanel('icon'),
     ]
 

@@ -10,7 +10,7 @@
     <li class="nav-item"><a href ="{% url 'articles' %}" class="blog_menu_item">Все</a></li>
     {% for category in categories %}
         <li class="nav-item">
-           <a href="#"> {{category.name}}</a>
+           <a href="?category={{ category.slug }}"> {{category.name}}</a>
         </li>
 
     {% endfor %}
