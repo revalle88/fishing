@@ -1,7 +1,6 @@
 {% extends "blog/base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
-
+{% load wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags%}
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block content %}
@@ -10,7 +9,7 @@
     <li class="nav-item"><a href ="{% url 'articles' %}" class="blog_menu_item">Все</a></li>
     {% for category in categories %}
         <li class="nav-item">
-           <a href="?category={{ category.slug }}"> {{category.name}}</a>
+           <a href="{% routablepageurl blog_page 'post_by_category' category.slug %}"> {{category.name}}</a>
         </li>
 
     {% endfor %}
@@ -38,7 +37,7 @@
         <div class = "post-date py-2">{{post.last_published_at}}</div>
         </div>
     {% empty %}
-        No pages found with that tag.
+        No pages found.
     {% endfor %}
      </div>
 {% endblock %}
