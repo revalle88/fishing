@@ -29,7 +29,8 @@
         <a href="{% pageurl post %}">
 
         {% if post.main_image %}
-            {% image post.main_image width-300 %}
+<!--            <div class = "blog-list-image" style="background-image: {{post.main_image.url}};"></div>-->
+            {% image post.main_image fill-300x200 %}
         {% endif %}
         <div class="article-name py-2">{{ post.title }}</div>
         </a>
