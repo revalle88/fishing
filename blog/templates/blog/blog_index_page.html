@@ -6,7 +6,7 @@
 {% block content %}
 <nav class="navbar navbar-expand-sm">
 <ul class="navbar-nav w-100 justify-content-around">
-    <li class="nav-item"><a href ="{% url 'articles' %}" class="blog_menu_item">Все</a></li>
+    <li class="nav-item"><a href ="{% routablepageurl blog_page 'post_list' %}" class="blog_menu_item">Все</a></li>
     {% for category in categories %}
         <li class="nav-item">
            <a href="{% routablepageurl blog_page 'post_by_category' category.slug %}"> {{category.name}}</a>
