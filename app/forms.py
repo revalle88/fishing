@@ -2,7 +2,7 @@
 from django import forms
 
 from .models import Pound, Review, Fish, Images
-from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+from django_summernote.widgets import SummernoteWidget
 
 
 class PoundForm(forms.ModelForm):
