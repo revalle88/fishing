@@ -55,24 +55,25 @@ def review_show(request, id):
     # client = redis.from_url(settings.REDIS_URI)
 
     import pymongo
-
+    # TODO: pymongo weather
     conn = pymongo.MongoClient(settings.MONGO_URI)
     db = conn['weather']
-    coll = db.coll
+    coll = db['coll']
     print('MONGO TEST!!!!')
-    print(settings.MONGO_URI)
-    print(db)
-    print(coll)
-    print(coll.find({"name": "Петр"}).count())
+    print()
     doc = {"name": "Петр", "surname": "Иванов"}
     coll.save(doc)
     print(coll.find({"name": "Петр"}).count())
-    with urllib.request.urlopen("https://api.darksky.net/forecast/caf0208379875df865f2185f5246bf48/53.8267,45.4233?units=auto") as url:
-        resp = url.read()
-    print(resp)
-    resp_jsonified = json.loads(resp)
-    print(resp_jsonified.get('currently')['temperature'])
-    weather = resp_jsonified.get('currently')
+    if coll.find({"name": "Петр"}).count() == 0:
+        with urllib.request.urlopen("https://api.darksky.net/forecast/caf0208379875df865f2185f5246bf48/53.8267,45.4233?units=auto") as url:
+            resp = url.read()
+        print(resp)
+        resp_jsonified = json.loads(resp)
+        print(resp_jsonified.get('currently')['temperature'])
+        weather = resp_jsonified.get('currently')
+        coll.save(weather)
+    else:
+        weather = coll.find({"latitude": "Петр"})
     point = {"lat": review.lat, "lang": review.lang}
     fish_caught = review.fish_caught.all()
     print(fish_caught)
