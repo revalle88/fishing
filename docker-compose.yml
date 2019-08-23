@@ -12,7 +12,7 @@ services:
   geofishing:
     build: .
     image: fishing_geofishing
-    container_name: geofishing
+    container_name: geofishing_app
     environment:
       - DJANGO_DEBUG=True
     volumes:
@@ -31,3 +31,16 @@ services:
     restart: always
     stdin_open: true
     tty: true
+
+  mongodb:
+      image: mongo:latest
+      container_name: geofishing_mongodb
+      hostname: mongodb
+      environment:
+        - MONGO_DATA_DIR=/data/db
+        - MONGO_LOG_DIR=/dev/null
+      volumes:
+        - ./data/mongo:/data/db
+      ports:
+          - 27027:27017
+      command: mongod --smallfiles --logpath=/dev/null # --quiet

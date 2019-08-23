@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+# import redis
+
+from django.conf import settings
 from django.forms import modelformset_factory
 from django.shortcuts import render
 
@@ -48,8 +51,22 @@ def review_new(request):
 
 
 def review_show(request, id):
-    print(id)
     review = Review.objects.filter(id=id)[0]
+    # client = redis.from_url(settings.REDIS_URI)
+
+    import pymongo
+
+    conn = pymongo.MongoClient(settings.MONGO_URI)
+    db = conn['weather']
+    coll = db.coll
+    print('MONGO TEST!!!!')
+    print(settings.MONGO_URI)
+    print(db)
+    print(coll)
+    print(coll.find({"name": "Петр"}).count())
+    doc = {"name": "Петр", "surname": "Иванов"}
+    coll.save(doc)
+    print(coll.find({"name": "Петр"}).count())
     with urllib.request.urlopen("https://api.darksky.net/forecast/caf0208379875df865f2185f5246bf48/53.8267,45.4233?units=auto") as url:
         resp = url.read()
     print(resp)

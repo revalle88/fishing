@@ -266,4 +266,6 @@ DEBUG_TOOLBAR_CONFIG = {
 
 WAGTAIL_SITE_NAME = 'GeoFishing'
 
+REDIS_URI = 'redis://redis/1'
 
+MONGO_URI = 'mongodb'
