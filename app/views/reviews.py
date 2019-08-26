@@ -63,20 +63,18 @@ def review_show(request, id):
     print()
     doc = {"name": "Петр", "surname": "Иванов"}
     coll.save(doc)
-    print(coll.find({"name": "Петр"}).count())
-    if coll.find({"name": "Петр"}).count() == 0:
-        with urllib.request.urlopen("https://api.darksky.net/forecast/caf0208379875df865f2185f5246bf48/53.8267,45.4233?units=auto") as url:
+    if coll.find({"latitude": review.lat, "longitude": review.lang}).count() == 0:
+        with urllib.request.urlopen("https://api.darksky.net/forecast/caf0208379875df865f2185f5246bf48/"+str(review.lat)+","+str(review.lang)+"?units=auto") as url:
             resp = url.read()
-        print(resp)
+        print('not in mongo')
         resp_jsonified = json.loads(resp)
-        print(resp_jsonified.get('currently')['temperature'])
         weather = resp_jsonified.get('currently')
-        coll.save(weather)
+        coll.save(resp_jsonified)
     else:
-        weather = coll.find({"latitude": "Петр"})
+        weather = coll.find_one({"latitude": review.lat, "longitude": review.lang})['currently']
+        print('in mongo')
     point = {"lat": review.lat, "lang": review.lang}
     fish_caught = review.fish_caught.all()
-    print(fish_caught)
     return render(
         request, 'app/review_show.html', {'review': review, 'weather': weather, "point": point, 'fish_caught': fish_caught, 'images': review.images_set.all()}
     )
