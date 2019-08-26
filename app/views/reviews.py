@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 # import redis
 
-from django.conf import settings
+from ..services.weather import WeatherManager
 from django.forms import modelformset_factory
 from django.shortcuts import render
 
@@ -52,27 +52,7 @@ def review_new(request):
 
 def review_show(request, id):
     review = Review.objects.filter(id=id)[0]
-    # client = redis.from_url(settings.REDIS_URI)
-
-    import pymongo
-    # TODO: pymongo weather
-    conn = pymongo.MongoClient(settings.MONGO_URI)
-    db = conn['weather']
-    coll = db['coll']
-    print('MONGO TEST!!!!')
-    print()
-    doc = {"name": "Петр", "surname": "Иванов"}
-    coll.save(doc)
-    if coll.find({"latitude": review.lat, "longitude": review.lang}).count() == 0:
-        with urllib.request.urlopen("https://api.darksky.net/forecast/caf0208379875df865f2185f5246bf48/"+str(review.lat)+","+str(review.lang)+"?units=auto") as url:
-            resp = url.read()
-        print('not in mongo')
-        resp_jsonified = json.loads(resp)
-        weather = resp_jsonified.get('currently')
-        coll.save(resp_jsonified)
-    else:
-        weather = coll.find_one({"latitude": review.lat, "longitude": review.lang})['currently']
-        print('in mongo')
+    weather = WeatherManager().get_weather(review)
     point = {"lat": review.lat, "lang": review.lang}
     fish_caught = review.fish_caught.all()
     return render(
