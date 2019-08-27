@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 
+from ..services.weather import WeatherManager
 from ..models import Pound, Review
 from ..forms import PoundForm
 
@@ -18,7 +19,12 @@ def pound_show(request, id):
     pound = Pound.objects.filter(id=id)[0]
     point = {"lat": pound.lat, "lang": pound.lang}
     reviews = Review.objects.filter(pound=pound)
-    return render(request, 'app/pound_details.html', {"pound": pound, "point": point, "reviews": reviews})
+    weather = WeatherManager().get_weather(pound.lat, pound.lang)
+    return render(
+        request,
+        'app/pound_details.html',
+        {"pound": pound, "point": point, "reviews": reviews, "weather": weather}
+    )
 
 
 def pound_new(request):

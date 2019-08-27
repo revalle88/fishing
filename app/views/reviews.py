@@ -24,7 +24,6 @@ def review_new(request):
                                         form=ImageForm, extra=3)
 
     if request.method == "POST":
-        print("!!!!POST")
         form = ReviewForm(request.POST)
 
         formset = ImageFormSet(request.POST, request.FILES,
@@ -52,7 +51,7 @@ def review_new(request):
 
 def review_show(request, id):
     review = Review.objects.filter(id=id)[0]
-    weather = WeatherManager().get_weather(review)
+    weather = WeatherManager().get_weather(review.lat, review.lang)
     point = {"lat": review.lat, "lang": review.lang}
     fish_caught = review.fish_caught.all()
     return render(

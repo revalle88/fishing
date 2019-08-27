@@ -8,9 +8,7 @@
 {% endblock %}
 
 {% block content %}
-IT WORKS
-{{pound.lat}}
-{{pound.lang}}
+{% include 'app/weather.html' %}
 <h3>Review: </h3>
 <div>{{pound.description|safe}}</div>
 
