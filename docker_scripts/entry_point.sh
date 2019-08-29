@@ -1,3 +1,4 @@
+wait-for-it -t 30 postgres:5432
 python manage.py makemigrations
 until python manage.py migrate; do
   sleep 2

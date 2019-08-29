@@ -68,6 +68,11 @@ text-decoration: none;
     height: 85px;
 }
 
+.review_photo {
+    width: 150px;
+    height: 150px;
+}
+
 .fishes_list_home {
   columns: 4;
   -webkit-columns: 4;
