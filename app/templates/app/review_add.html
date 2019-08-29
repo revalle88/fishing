@@ -18,11 +18,6 @@
         {{ field }} <br />
     {% endfor %}
 
-    {{ formset.management_form }}
-    {% for form in formset %}
-        {{ form }}
-    {% endfor %}
-
 
     <input type="submit" name="submit" value="Submit" />
 </form>

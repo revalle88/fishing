@@ -13,19 +13,11 @@
 {% include 'app/weather.html' %}
 <div id="map1"></div>
 <div>
-    {% for fish in fish_caught %}
-        <a href = "{% url 'fish_details' fish.id %}">
-            <li class = "list-group-item"><img src = "{{fish.picture.url}}" class = "fish_icon_medium">
-                {{fish.name}}
-            </li>
-        </a>
-    {% endfor %}
+        <img src = "{{review.fish_caught.picture.url}}" class = "fish_icon_medium">
+                {{review.fish_caught.name}}
 </div>
 
 <div class = "photoes">
-<!--    {{review.images}}-->
-    {% for image in images %}
-        <img src = "{{image.image.url}}" class = "review_photo">
-    {% endfor %}
+            <img src = "{{review.picture.url}}" class = "fish_icon">{{fish.name}}
 </div>
 {% endblock %}

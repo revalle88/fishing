@@ -48,23 +48,20 @@ class Pound(models.Model):
         verbose_name_plural = 'Пруды'
 
 
-def get_image_filename(instance, filename):
-    slug = instance.review.id
-    return "review_images/%s-%s" % (slug, filename)
-
-
 class Review(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     pound = models.ForeignKey(Pound, on_delete=models.CASCADE, blank=True, null=True)
     content = models.TextField()
-    fish_caught = models.ManyToManyField(Fish)
+    fish_caught = models.ForeignKey(Fish, on_delete=models.CASCADE, blank=True, null=True)
     created_date = models.DateTimeField(
             default=timezone.now)
     fishing_date = models.DateTimeField(
             default=timezone.now)
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    likes = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(9999)])
     lang = models.FloatField(default=50)
     lat = models.FloatField(default=50)
+    picture = models.ImageField(upload_to='reviews', default='reviews/no-img.jpg')
 
     def __unicode__(self):
         return str(self.id)
@@ -72,9 +69,3 @@ class Review(models.Model):
     class Meta:
         verbose_name = 'Обзор'
         verbose_name_plural = 'Обзоры'
-
-
-class Images(models.Model):
-    review = models.ForeignKey(Review, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='fishes',
-                              verbose_name='Image')

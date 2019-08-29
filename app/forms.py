@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 
-from .models import Pound, Review, Fish, Images
+from .models import Pound, Review, Fish
 from django_summernote.widgets import SummernoteWidget
 
 
@@ -25,7 +25,7 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = Review
-        fields = ('lat', 'lang', 'fishing_date', 'pound', 'content', 'fish_caught', 'rating')
+        fields = ('lat', 'lang', 'fishing_date', 'pound', 'content', 'fish_caught', 'rating', 'likes', 'picture')
         labels = {
             "fishing_date": "Когда была рыбалка:",
             'pound': "к какому водоему относится: ",
@@ -36,19 +36,7 @@ class ReviewForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)
-        self.fields['fish_caught'].widget = forms.widgets.CheckboxSelectMultiple()
         self.fields["fish_caught"].help_text = ""
-        self.fields["fish_caught"].queryset = Fish.objects.all()
         self.fields["lat"].widget = forms.widgets.HiddenInput()
         self.fields["lang"].widget = forms.widgets.HiddenInput()
         self.fields["fishing_date"].widget = forms.widgets.SelectDateWidget()
-
-
-class ImageForm(forms.ModelForm):
-    image = forms.ImageField(label='Image')
-
-    class Meta:
-        model = Images
-        fields = ('image', )
-
-
