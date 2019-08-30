@@ -12,9 +12,6 @@ from ..forms import ReviewForm
 
 from django.shortcuts import redirect
 
-import urllib.request
-import json
-
 
 def review_new(request):
     if not request.user.is_authenticated:
@@ -26,6 +23,7 @@ def review_new(request):
         if form.is_valid():
             review = form.save(commit=False)
             review.author = request.user
+            review.picture = request.FILES['picture']
             review.save()
             return redirect('pounds')
     else:
