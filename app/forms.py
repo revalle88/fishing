@@ -21,17 +21,25 @@ class PoundForm(forms.ModelForm):
 class ReviewForm(forms.ModelForm):
 
     # pound = forms.ModelChoiceField(queryset=Pound.objects.all(), required=False)
-    rating = forms.IntegerField(initial=5, min_value=1, max_value=5)
+    # rating = forms.IntegerField(initial=5, min_value=1, max_value=5)
 
     class Meta:
         model = Review
-        fields = ('lat', 'lang', 'fishing_date', 'pound', 'content', 'fish_caught', 'rating', 'likes', 'picture')
+        fields = (
+            'lat',
+            'lang',
+            'fishing_date',
+            'pound', 'length',
+            'weight',
+            'content',
+            'fish_caught',
+            'picture'
+        )
         labels = {
             "fishing_date": "Когда была рыбалка:",
             'pound': "к какому водоему относится: ",
             'content': "Описание",
             'fish_caught': "Рыба поймана",
-            'rating': "Рейтинг"
         }
 
     def __init__(self, *args, **kwargs):

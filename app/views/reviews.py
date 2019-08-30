@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-# import redis
-
 from ..services.weather import WeatherManager
-from django.forms import modelformset_factory
 from django.shortcuts import render
 
 from ..models import Review

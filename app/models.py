@@ -57,11 +57,13 @@ class Review(models.Model):
             default=timezone.now)
     fishing_date = models.DateTimeField(
             default=timezone.now)
-    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
-    likes = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(9999)])
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], blank=True, null=True)
+    likes = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(9999)], blank=True, null=True)
     lang = models.FloatField(default=50)
     lat = models.FloatField(default=50)
     picture = models.ImageField(upload_to='reviews', default='reviews/no-img.jpg')
+    length = models.FloatField(default=0)
+    weight = models.FloatField(default=0)
 
     def __unicode__(self):
         return str(self.id)
