@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from django import forms
 
-from .models import Pound, Review, Fish
+from .models import Pound, Review
 from django_summernote.widgets import SummernoteWidget
+from bootstrap_datepicker_plus import DatePickerInput
 
 
 class PoundForm(forms.ModelForm):
@@ -47,4 +48,5 @@ class ReviewForm(forms.ModelForm):
         self.fields["fish_caught"].help_text = ""
         self.fields["lat"].widget = forms.widgets.HiddenInput()
         self.fields["lang"].widget = forms.widgets.HiddenInput()
-        self.fields["fishing_date"].widget = forms.widgets.SelectDateWidget()
+        # self.fields["fishing_date"].widget = forms.widgets.SelectDateWidget()
+        self.fields["fishing_date"].widget = DatePickerInput()

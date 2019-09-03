@@ -11,6 +11,8 @@ Django~=2.1.7
 django-debug-toolbar==1.9.1
 django-summernote==0.8.11.4
 djangorestframework==3.9.1
+django-bootstrap-datepicker-plus
+django-bootstrap4
 entrypoints==0.3
 enum34==1.1.6
 geojson==2.4.1

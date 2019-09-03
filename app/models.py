@@ -55,7 +55,7 @@ class Review(models.Model):
     fish_caught = models.ForeignKey(Fish, on_delete=models.CASCADE, blank=True, null=True)
     created_date = models.DateTimeField(
             default=timezone.now)
-    fishing_date = models.DateTimeField(
+    fishing_date = models.DateField(
             default=timezone.now)
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], blank=True, null=True)
     likes = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(9999)], blank=True, null=True)
