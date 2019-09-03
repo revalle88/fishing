@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
+from django.utils.timezone import now
 
 from .models import Pound, Review
 from django_summernote.widgets import SummernoteWidget
@@ -24,7 +25,7 @@ class ReviewForm(forms.ModelForm):
 
     # pound = forms.ModelChoiceField(queryset=Pound.objects.all(), required=False)
     # rating = forms.IntegerField(initial=5, min_value=1, max_value=5)
-    fishing_date = DateField(input_formats=['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y'])
+    fishing_date = DateField(input_formats=['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y'], initial=now().date())
 
     class Meta:
         model = Review
@@ -32,7 +33,8 @@ class ReviewForm(forms.ModelForm):
             'lat',
             'lang',
             'fishing_date',
-            'pound', 'length',
+            'pound',
+            'length',
             'weight',
             'content',
             'fish_caught',
@@ -40,9 +42,11 @@ class ReviewForm(forms.ModelForm):
         )
         labels = {
             "fishing_date": "Когда была рыбалка:",
-            'pound': "к какому водоему относится: ",
+            'pound': "Водоем",
             'content': "Описание",
             'fish_caught': "Рыба поймана",
+            'weight': "Вес",
+            'length': 'Длина'
         }
 
     def __init__(self, *args, **kwargs):

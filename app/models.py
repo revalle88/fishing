@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import datetime
+
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
 from django.db import models
+from django.utils.timezone import now
 
 
 class Fish(models.Model):
@@ -50,13 +53,13 @@ class Pound(models.Model):
 
 class Review(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    pound = models.ForeignKey(Pound, on_delete=models.CASCADE, blank=True, null=True)
+    pound = models.ForeignKey(Pound, on_delete=models.CASCADE, blank=True, null=True, default=lambda: Pound.objects.all().first())
     content = models.TextField()
-    fish_caught = models.ForeignKey(Fish, on_delete=models.CASCADE, blank=True, null=True)
+    fish_caught = models.ForeignKey(Fish, on_delete=models.CASCADE, blank=True, null=True, default=lambda: Fish.objects.all().first())
     created_date = models.DateTimeField(
             default=timezone.now)
     fishing_date = models.DateField(
-            default=timezone.now)
+            default=lambda: now().date())
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], blank=True, null=True)
     likes = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(9999)], blank=True, null=True)
     lang = models.FloatField(default=50)
