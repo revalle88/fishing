@@ -46,7 +46,8 @@ class ReviewForm(forms.ModelForm):
             'content': "Описание",
             'fish_caught': "Рыба поймана",
             'weight': "Вес",
-            'length': 'Длина'
+            'length': 'Длина',
+            'picture': 'Прикрепить фото'
         }
 
     def __init__(self, *args, **kwargs):
