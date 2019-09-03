@@ -19,7 +19,8 @@ def review_new(request):
         if form.is_valid():
             review = form.save(commit=False)
             review.author = request.user
-            review.picture = request.FILES['picture']
+            if request.FILES.get('picture') is not None:
+                review.picture = request.FILES.get('picture')
             review.save()
             return redirect('pounds')
     else:
