@@ -19,8 +19,9 @@ def home(request):
 
     filter = ReviewFilter(request.GET, queryset=reviews_list)
     reviews = filter.qs
+    has_filter = any(field in request.GET for field in set(filter.get_fields()))
 
-    return render(request, 'app/home.html', {"reviews": reviews, "filter": filter, "fishes": fishes, "pounds": pounds})
+    return render(request, 'app/home.html', {"reviews": reviews, "filter": filter, "fishes": fishes, "pounds": pounds, 'has_filter': has_filter})
 
 
 class SignUp(generic.CreateView):

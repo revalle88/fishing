@@ -25,6 +25,9 @@
     {{ filter.form.as_p }}
     <button type="submit">Search</button>
   </form>
+{% if has_filter %}
+  <a href="{%  url 'home' %}"> Очистить фильтр </a>
+{% endif %}
 
 <div class = "row justify-content-around">
     {% for fish in fishes %}
