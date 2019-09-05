@@ -35,6 +35,7 @@ class ReviewForm(forms.ModelForm):
             'fishing_date',
             'fish_caught',
             'picture',
+            'method',
             'content',
             'length',
             'weight',

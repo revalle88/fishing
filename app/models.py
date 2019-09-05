@@ -14,6 +14,20 @@ CATCH_EASE = ((EASY, 'легко'), (MEDIUM, 'средне'), (HARD, 'сложн
 # CATCH_EASE = {EASY: 'легко', MEDIUM: 'средне', HARD: 'сложно'}
 
 
+class Method(models.Model):
+    name = models.CharField(max_length=200)
+    content = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Метод ловли'
+
+
 class Fish(models.Model):
     name = models.CharField(max_length=200)
     short_desc = models.CharField(max_length=500, blank=True, null=True)
@@ -75,6 +89,7 @@ class Review(models.Model):
     picture = models.ImageField(upload_to='reviews', default='reviews/no-img.jpg')
     length = models.FloatField(default=0)
     weight = models.FloatField(default=0)
+    method = models.ForeignKey(Method, on_delete=models.CASCADE, default=1)
 
     def __unicode__(self):
         return str(self.id)
