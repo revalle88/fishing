@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 
+from ..filters import ReviewFilter
 from ..models import Pound, Review, Fish
 
 
@@ -12,10 +13,14 @@ from django.views import generic
 
 
 def home(request):
-    reviews = Review.objects.all()
+    reviews_list = Review.objects.all()
     fishes = Fish.objects.all()
     pounds = Pound.objects.all()
-    return render(request, 'app/home.html', {"reviews": reviews, "fishes": fishes, "pounds": pounds})
+
+    filter = ReviewFilter(request.GET, queryset=reviews_list)
+    reviews = filter.qs
+
+    return render(request, 'app/home.html', {"reviews": reviews, "filter": filter, "fishes": fishes, "pounds": pounds})
 
 
 class SignUp(generic.CreateView):
