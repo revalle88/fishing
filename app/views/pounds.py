@@ -28,6 +28,8 @@ def pound_show(request, id):
 
 
 def pound_new(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     if request.method == "POST":
         form = PoundForm(request.POST)
         if form.is_valid():

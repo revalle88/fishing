@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'wagtail.contrib.routable_page',
     'taggit',
     'modelcluster',
+    'bootstrap_datepicker_plus',
+    'bootstrap4',
 ]
 
 INSTALLED_APPS += ('django_summernote', )
@@ -224,6 +226,11 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOpenId',  # for Google authentication
     'social_core.backends.google.GoogleOAuth2',  # for Google authentication
 )
+
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
 
 
 # Static files (CSS, JavaScript, Images)

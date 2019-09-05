@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import Pound, Fish, Review, Images
+from .models import Pound, Fish, Review
 
 from django_summernote.admin import SummernoteModelAdmin
 
@@ -11,7 +11,6 @@ from django_summernote.admin import SummernoteModelAdmin
 
 admin.site.register(Pound)
 admin.site.register(Review)
-admin.site.register(Images)
 
 
 class FishAdmin(SummernoteModelAdmin):  # instead of ModelAdmin

@@ -5,13 +5,21 @@
 {% endblock %}
 
 {% block content %}
-    <ul class = "list-group">
+    <div class = "row justify-content-around">
     {% for fish in fishes %}
-        <a href = "{% url 'fish_details' fish.id %}">
-            <li class = "list-group-item"><img src = "{{fish.picture.url}}" class = "fish_icon_medium">
-                {{fish.name}}<br>{{fish.short_desc}}
-            </li>
-        </a>
+            <div class="col-lg-4 col-md-6 col-xs-12 py-2 blog_article">
+
+                <a href = "{% url 'fish_details' fish.id %}">
+                {{fish.name}}
+                    <div><img src = "{{fish.picture.url}}" class = "fish_icon_medium"></div>
+
+                 </a>
+                <div>
+                    сложность вылова<br>
+                    {{fish.get_catch_ease_display}}
+                </div>
+            </div>
+
     {% endfor %}
-    </ul>
+    </div>
 {% endblock %}
