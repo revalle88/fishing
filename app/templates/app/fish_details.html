@@ -3,9 +3,17 @@
 {% block content %}
     <p>FIsh list:</p>
 
-
         <div>
-            <img src = "{{fish.picture.url}}" class = "fish_icon">{{fish.name}}
+            {{fish.name}}
+        </div>
+        <div>
+            <img src = "{{fish.picture.url}}" class = "fish_icon_medium">
+        </div>
+        <div>
+            {{fish.short_descr}}
+        </div>
+        <div>
+            сложность: {{fish.get_catch_ease_display}}
         </div>
         <div>
             {{fish.description|safe}}
