@@ -8,19 +8,28 @@
 {% endblock %}
 
 {% block content %}
-<h3>Review: </h3>
-<div>{{review.content}}</div>
-{% include 'app/weather.html' %}
-<div id="map1"></div>
+    <div class = "row justify-content-around">
+
+        <div class="col-lg-2 col-md-2 col-xs-1 py-2">
+            рыбак: {{review.author.username}}
+            <div class = 'fish_size'>
+                длина {{review.length}} см<br>
+                вес {{review.weight}} кг<br>
+            </div>
+            <div class = "photoes">
+                        <img src = "{{review.picture.url}}" class = "review_photo">{{fish.name}}
+            </div>
+            <div>{{review.content}}</div>
+        </div>
+        <div class = "col-lg-2 col-md-2 col-xs-1 py-2">
+            <div id="map1"></div>
+            {% include 'app/weather.html' %}
+        </div>
+    </div>
 <!--<div>-->
 <!--        <img src = "{{review.fish_caught.picture.url}}" class = "fish_icon_medium">-->
 <!--                {{review.fish_caught.name}}-->
 <!--</div>-->
-<div class = 'fish_size'>
-    длина {{review.length}} см<br>
-    вес {{review.weight}} кг<br>
-</div>
-<div class = "photoes">
-            <img src = "{{review.picture.url}}" class = "fish_icon">{{fish.name}}
-</div>
+
+
 {% endblock %}
