@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import datetime
-
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
 from django.db import models
 from django.utils.timezone import now
+
+
+EASY = 'E'
+MEDIUM = 'M'
+HARD = 'H'
+CATCH_EASE = ((EASY, 'легко'), (MEDIUM, 'средне'), (HARD, 'сложно'))
+# CATCH_EASE = {EASY: 'легко', MEDIUM: 'средне', HARD: 'сложно'}
 
 
 class Fish(models.Model):
@@ -14,6 +19,7 @@ class Fish(models.Model):
     short_desc = models.CharField(max_length=500, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     picture = models.ImageField(upload_to='fishes', default='fishes/no-img.jpg')
+    catch_ease = models.CharField(max_length=1, default=MEDIUM, choices=CATCH_EASE)
 
     def __str__(self):
         return self.name
@@ -53,13 +59,15 @@ class Pound(models.Model):
 
 class Review(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    pound = models.ForeignKey(Pound, on_delete=models.CASCADE, blank=True, null=True, default=lambda: Pound.objects.all().first())
+    # pound = models.ForeignKey(Pound, on_delete=models.CASCADE, blank=True, null=True, default=lambda: Pound.objects.all().first())
+    pound = models.ForeignKey(Pound, on_delete=models.CASCADE, blank=True, null=True, default=1)
     content = models.TextField()
-    fish_caught = models.ForeignKey(Fish, on_delete=models.CASCADE, blank=True, null=True, default=lambda: Fish.objects.all().first())
+    # fish_caught = models.ForeignKey(Fish, on_delete=models.CASCADE, blank=True, null=True, default=lambda: Fish.objects.all().first())
+    fish_caught = models.ForeignKey(Fish, on_delete=models.CASCADE, default=1)
     created_date = models.DateTimeField(
             default=timezone.now)
-    fishing_date = models.DateField(
-            default=lambda: now().date())
+    # fishing_date = models.DateField(default=lambda: now().date())
+    fishing_date = models.DateField(default=now().date())
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], blank=True, null=True)
     likes = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(9999)], blank=True, null=True)
     lang = models.FloatField(default=50)
@@ -70,6 +78,7 @@ class Review(models.Model):
 
     def __unicode__(self):
         return str(self.id)
+
 
     class Meta:
         verbose_name = 'Обзор'
