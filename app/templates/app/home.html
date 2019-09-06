@@ -20,9 +20,9 @@
 
 
 {% block content %}
-
+    <br>
   <form method="get">
-      <div>Параметры поиска: </div>
+      <div>Параметры поиска:     <button type="submit">Применить</button> </div>
 <!--    {{ filter.form.as_p }}-->
       <div class = "row">
           <div class="col-lg-3 col-md-6 col-xs-12 py-2">
@@ -39,25 +39,19 @@
           </div>
 
       </div>
-    <button type="submit">Применить</button>
+
   </form>
 {% if has_filter %}
   <a href="{%  url 'home' %}"> Очистить фильтр </a>
 {% endif %}
 
-<div class = "row justify-content-around">
-    {% for fish in fishes %}
-        <div class="col-lg-3 col-md-6 col-xs-12"><a href = "{% url 'fish_details' fish.id %}"><img src = "{{fish.picture.url}}" class = "fish_icon">{{fish.name}}</a></div>
-    {% endfor %}
 
 
-</div>
-
-<div class="reviews_main">
-    Обзоры:
-    {% for review in reviews %}
-    <li><a href = "{% url 'review_show' review.id %}">{{review.author.username}}  {{review.fishing_date}} </a></li>
-    {% endfor %}
-</div>
+<!--<div class="reviews_main">-->
+<!--    Последние уловы:-->
+<!--    {% for review in reviews %}-->
+<!--    <li><a href = "{% url 'review_show' review.id %}">{{review.author.username}}  {{review.fishing_date}} </a></li>-->
+<!--    {% endfor %}-->
+<!--</div>-->
 
 {% endblock %}
