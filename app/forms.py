@@ -42,7 +42,7 @@ class ReviewForm(forms.ModelForm):
             'pound'
         )
         labels = {
-            "fishing_date": "Когда была рыбалка:",
+            "fishing_date": "Когда",
             'pound': "Водоем",
             'content': "Описание",
             'fish_caught': "Рыба поймана",

@@ -45,12 +45,11 @@ function init () {
             var new_pound_url = "{% url 'pound_new' %}"+"?lat="+coords[0]+"&lang="+coords[1];
 
             myMap.balloon.open(coords, {
-                contentHeader:'Событие!',
                 contentBody:
-                    '<p>Координаты щелчка: ' + [
+                    '<p>Координаты : <br>' + [
                     coords[0].toPrecision(6),
                     coords[1].toPrecision(6)
-                    ].join(', ') + '</p>',
+                    ].join('<br>') + '</p>',
                 contentFooter: "<a href="+myurl+">Добавить точку ловли</a><br><a href="+new_pound_url+">Добавить водоем</a>"
             });
         }

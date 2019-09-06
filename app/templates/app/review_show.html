@@ -10,7 +10,7 @@
 {% block content %}
     <div class = "row justify-content-around">
 
-        <div class="col-lg-2 col-md-2 col-xs-1 py-2">
+        <div class="col-lg-6 col-md-6 col-xs-12 py-2">
             рыбак: {{review.author.username}}
             <div class = 'fish_size'>
                 длина {{review.length}} см<br>
@@ -22,7 +22,7 @@
             </div>
             <div>{{review.content}}</div>
         </div>
-        <div class = "col-lg-2 col-md-2 col-xs-1 py-2">
+        <div class = "col-lg-6 col-md-6 col-xs-12 py-2">
             <div id="map1"></div>
             {% include 'app/weather.html' %}
         </div>
