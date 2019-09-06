@@ -8,21 +8,29 @@
 {% endblock %}
 
 {% block content %}
-    <div class = "row justify-content-around">
+    <div class = "row align-items-center">
 
-        <div class="col-lg-6 col-md-6 col-xs-12 py-2">
-            рыбак: {{review.author.username}}
-            <div class = 'fish_size'>
-                длина {{review.length}} см<br>
-                вес {{review.weight}} кг<br>
-                метод: {{review.method.name}}<br>
+        <div class="col-lg-6 col-md-8 col-xs-12 py-2 ">
+            <div class = "author_name">
+                рыбак: {{review.author.username}}
+            </div>
+            <div class = "review_date">
+                {{review.fishing_date}}
             </div>
             <div class = "photoes">
                         <img src = "{{review.picture.url}}" class = "review_photo">{{fish.name}}
             </div>
+            <div class = 'fish_size'>
+                длина {{review.length}} см<br>
+                вес {{review.weight}} кг<br>
+            </div>
+            <div class = "review_method">
+                метод: {{review.method.name}}
+            </div>
+
             <div>{{review.content}}</div>
         </div>
-        <div class = "col-lg-6 col-md-6 col-xs-12 py-2">
+        <div class = "col-lg-4 col-md-4 col-xs-12 py-2">
             <div id="map1"></div>
             {% include 'app/weather.html' %}
         </div>
