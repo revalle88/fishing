@@ -14,7 +14,7 @@ function init () {
     myMap.geoObjects
         {% for review in reviews %}
         .add(new ymaps.Placemark([parseFloat("{{review.lat}}".replace(",",".")), parseFloat("{{review.lang}}".replace(",","."))], {
-            balloonContent: "{{review.fishing_date}}<br>Поймано: <a href = {% url 'fish_details' review.fish_caught.id %}>{{review.fish_caught.name}}</a><br><a href = {% url 'review_show' review.id %}>Детали...</a><img src = {{review.picture.url}}>"
+            balloonContent: "{{review.fishing_date}}<br>Поймано: <a href = {% url 'fish_details' review.fish_caught.id %}>{{review.fish_caught.name}}</a><br><a href = {% url 'review_show' review.id %}>Детали...</a>"
         }, {
             preset: 'islands#icon',
             iconColor: '#0095b6'
@@ -44,14 +44,13 @@ function init () {
             var myurl = "{% url 'review_new' %}"+"?lat="+coords[0]+"&lang="+coords[1];
             var new_pound_url = "{% url 'pound_new' %}"+"?lat="+coords[0]+"&lang="+coords[1];
 
-
             myMap.balloon.open(coords, {
                 contentBody:
                     '<p>Координаты : <br>' + [
                     coords[0].toPrecision(6),
                     coords[1].toPrecision(6)
                     ].join('<br>') + '</p>',
-                contentFooter: "<a href="+myurl+">Добавить точку ловли</a><br><a href="+new_pound_url+">Добавить водоем</a>"+catch_pic
+                contentFooter: "<a href="+myurl+">Добавить точку ловли</a><br><a href="+new_pound_url+">Добавить водоем</a>"
             });
         }
         else {
