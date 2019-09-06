@@ -1,3 +1,4 @@
+{% load static %}
 <script>
 ymaps.ready(init);
 var myMap;
@@ -16,16 +17,21 @@ function init () {
         .add(new ymaps.Placemark([parseFloat("{{review.lat}}".replace(",",".")), parseFloat("{{review.lang}}".replace(",","."))], {
             balloonContent: "{{review.fishing_date}}<br>Поймано: <a href = {% url 'fish_details' review.fish_caught.id %}>{{review.fish_caught.name}}</a><br><a href = {% url 'review_show' review.id %}>Детали...</a>"
         }, {
-            preset: 'islands#icon',
-            iconColor: '#0095b6'
-        }))
+            iconLayout: 'default#image',
+            iconImageHref: '{% static "images/icons/catch_icon.png" %}',
+            iconImageSize: [24, 24],
+            iconImageOffset: [-10, -5]
+        }
+        ))
         {% endfor %}
         {% for pound in pounds %}
         .add(new ymaps.Placemark([parseFloat("{{pound.lat}}".replace(",",".")), parseFloat("{{pound.lang}}".replace(",","."))], {
             balloonContent: "<a href = {% url 'pound_show' pound.id %}>{{pound.name}} - {{pound.is_paid}}</a>"
         }, {
-            preset: 'islands#circleDotIcon',
-            iconColor: 'green'
+            iconLayout: 'default#image',
+            iconImageHref: '{% static "images/icons/pound_icon.png" %}',
+            iconImageSize: [20, 20],
+            iconImageOffset: [-10, -5]
         }))
         {% endfor %}
 
