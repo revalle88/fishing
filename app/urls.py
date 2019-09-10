@@ -19,4 +19,5 @@ urlpatterns = [
     path("reviews/<int:id>/", views.review_show, name='review_show'),
     url(r'^$', views.home, name='home'),
     url(r'^test/$', views.bootstrap_test, name='bootstrap_test'),
+    url(r'^basic-upload/$', views.BasicUploadView.as_view(), name='basic_upload'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

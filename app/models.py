@@ -46,6 +46,13 @@ class Fish(models.Model):
         verbose_name_plural = 'Рыбы'
 
 
+class Photo(models.Model):
+    # pound = models.ForeignKey(Pound, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255, blank=True)
+    file = models.FileField(upload_to='pound_photos/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+
 # Create your models here.
 class Pound(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -69,6 +76,9 @@ class Pound(models.Model):
     class Meta:
         verbose_name = 'Пруд'
         verbose_name_plural = 'Пруды'
+
+
+
 
 
 class Review(models.Model):

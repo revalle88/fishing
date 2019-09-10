@@ -2,7 +2,7 @@
 from django import forms
 from django.utils.timezone import now
 
-from .models import Pound, Review
+from .models import Pound, Review, Photo
 from django_summernote.widgets import SummernoteWidget
 from bootstrap_datepicker_plus import DatePickerInput
 from django.forms import DateField
@@ -57,3 +57,9 @@ class ReviewForm(forms.ModelForm):
         self.fields["lat"].widget = forms.widgets.HiddenInput()
         self.fields["lang"].widget = forms.widgets.HiddenInput()
         self.fields["fishing_date"].widget = DatePickerInput(format='%m/%d/%Y')
+
+
+class PhotoForm(forms.ModelForm):
+    class Meta:
+        model = Photo
+        fields = ('file', )
