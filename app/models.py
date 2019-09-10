@@ -46,12 +46,6 @@ class Fish(models.Model):
         verbose_name_plural = 'Рыбы'
 
 
-class Photo(models.Model):
-    # pound = models.ForeignKey(Pound, on_delete=models.CASCADE)
-    title = models.CharField(max_length=255, blank=True)
-    file = models.FileField(upload_to='pound_photos/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
 
 # Create your models here.
 class Pound(models.Model):
@@ -78,7 +72,11 @@ class Pound(models.Model):
         verbose_name_plural = 'Пруды'
 
 
-
+class Photo(models.Model):
+    pound = models.ForeignKey(Pound, on_delete=models.CASCADE, default=1)
+    title = models.CharField(max_length=255, blank=True)
+    file = models.FileField(upload_to='pound_photos/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
 
 
 class Review(models.Model):
@@ -91,7 +89,7 @@ class Review(models.Model):
     created_date = models.DateTimeField(
             default=timezone.now)
     # fishing_date = models.DateField(default=lambda: now().date())
-    fishing_date = models.DateField(default=now().date())
+    fishing_date = models.DateField(default=timezone.now)
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], blank=True, null=True)
     likes = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(9999)], blank=True, null=True)
     lang = models.FloatField(default=50)

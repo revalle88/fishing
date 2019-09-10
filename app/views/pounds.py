@@ -20,7 +20,7 @@ def pound_show(request, id):
     point = {"lat": pound.lat, "lang": pound.lang}
     reviews = Review.objects.filter(pound=pound)
     weather = WeatherManager().get_weather(pound.lat, pound.lang)
-    photos_list = Photo.objects.all()
+    photos_list = Photo.objects.filter(pound_id=id)
     return render(
         request,
         'app/pound_details.html',
