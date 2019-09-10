@@ -62,4 +62,4 @@ class ReviewForm(forms.ModelForm):
 class PhotoForm(forms.ModelForm):
     class Meta:
         model = Photo
-        fields = ('file', )
+        fields = ('file', 'pound')

@@ -9,11 +9,13 @@ $(function () {
     dataType: 'json',
     done: function (e, data) {  /* 3. PROCESS THE RESPONSE FROM THE SERVER */
       if (data.result.is_valid) {
-        $("#gallery tbody").prepend(
-          "<img src = '"+data.result.url+"' style = 'width: 50px; height: 50px'><tr><td><a href='" + data.result.url + "'>" + data.result.name + "</a></td></tr>"
+        $("#gallery").prepend(
+          "<a href='" + data.result.url + "'><img src = '" + data.result.url + "' class = 'fish_icon_medium'></a>"
         )
       }
     }
   });
 
 });
+
+

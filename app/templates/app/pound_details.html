@@ -13,7 +13,7 @@
 <button type="button" class="btn btn-primary js-upload-photos">
   <span class="glyphicon glyphicon-cloud-upload"></span> Upload photos
 </button>
-
+<br>
 {# 2. FILE INPUT TO BE USED BY THE PLUG-IN #}
 <input id="fileupload" type="file" name="file" multiple
        style="display: none;"
@@ -21,20 +21,12 @@
        data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
 
 {# 3. TABLE TO DISPLAY THE UPLOADED PHOTOS #}
-<table id="gallery" class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Photo</th>
-    </tr>
-  </thead>
-  <tbody>
     {% for photo in photos %}
-      <tr>
-        <td><a href="{{ photo.file.url }}">{{ photo.file.name }}</a></td>
-      </tr>
+      <div id="gallery" style="display: inline-flex">
+        <a href="{{ photo.file.url }}"><img src = '{{ photo.file.url }}' class = "fish_icon_medium"></a>
+      </div>
     {% endfor %}
-  </tbody>
-</table>
+
 
 
 {% include 'app/weather.html' %}
