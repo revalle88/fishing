@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block content %}
-
 {# 1. BUTTON TO TRIGGER THE ACTION #}
 <button type="button" class="btn btn-primary js-upload-photos">
   <span class="glyphicon glyphicon-cloud-upload"></span> Upload photos
@@ -24,9 +23,12 @@
     {% for photo in photos %}
       <div id="gallery" style="display: inline-flex">
         <a href="{{ photo.file.url }}"><img src = '{{ photo.file.url }}' class = "fish_icon_medium"></a>
+
+            <button class = "delete" id="{{photo.id}}">
+                delete
+            </button>
       </div>
     {% endfor %}
-
 
 
 {% include 'app/weather.html' %}
@@ -52,4 +54,5 @@
 
 {# PHOTOS PAGE SCRIPTS #}
 <script src="{% static 'js/basic-upload.js' %}"></script>
+<script src="{% static 'js/delete_photo.js' %}"></script>
 {% endblock %}
