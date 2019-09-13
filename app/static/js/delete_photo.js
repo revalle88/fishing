@@ -15,14 +15,13 @@ function getCookie(c_name) {
 $(function () {
        $(".delete").click(function(){
                 var id_number = this.id;
-                alert(id_number);
                 $.ajax({
                    type: 'DELETE',
                    headers: { "X-CSRFToken": getCookie("csrftoken") },
                    url: '/basic-upload/',
                    data: 'photo_id='+id_number,
                    success: function(){
-                      if(data) {alert("Success!")}
+                      $("#photo_container_"+id_number).remove();
                     }
                 })
        })

@@ -23,7 +23,7 @@
 <div id="gallery" style="display: inline-flex">
     {% for photo in photos %}
 
-        <a href="{{ photo.file.url }}"><img src = '{{ photo.file.url }}' class = "fish_icon_medium"></a>
+        <a href="{{ photo.file.url }}" id="photo_container_{{photo.id}}"><img src = '{{ photo.file.url }}' class = "fish_icon_medium"></a>
 
             <button class = "delete" id="{{photo.id}}">
                 delete
