@@ -9,7 +9,12 @@ from ..models import Photo
 class BasicUploadView(View):
     def post(self, request):
         form = PhotoForm(self.request.POST, self.request.FILES)
+        print(1)
+        print(self.request.POST)
+        print(self.request.FILES)
+        print(form.errors)
         if form.is_valid():
+            print(2)
             photo = form.save()
             data = {'is_valid': True, 'name': photo.file.name, 'url': photo.file.url}
         else:
