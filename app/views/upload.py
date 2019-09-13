@@ -16,7 +16,7 @@ class BasicUploadView(View):
         if form.is_valid():
             print(2)
             photo = form.save()
-            data = {'is_valid': True, 'name': photo.file.name, 'url': photo.file.url}
+            data = {'is_valid': True, 'name': photo.file.name, 'url': photo.file.url, 'id': photo.id}
         else:
             data = {'is_valid': False}
         return JsonResponse(data)
