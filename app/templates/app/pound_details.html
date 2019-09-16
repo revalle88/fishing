@@ -52,11 +52,12 @@
 </form>
 {% endif %}
 
-
+<h3>Описание</h3>
 <div>{{pound.description|safe}}</div>
 
+
+<h3>Недавно поймали:</h3>
 <div class="reviews_main">
-    Обзоры:
     {% for review in reviews %}
     <li><a href = "{% url 'review_show' review.id %}">{{review.author.username}}  {{review.fishing_date}} </a></li>
     {% endfor %}
