@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^test/$', views.bootstrap_test, name='bootstrap_test'),
     url(r'^basic-upload/$', views.BasicUploadView.as_view(), name='basic_upload'),
+    url(r'^pounds/clearphotos/$', views.pound_images_clear, name='clear_pound_photos')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.shortcuts import redirect
 from django.views import View
 from django.http import QueryDict
 
@@ -28,3 +29,13 @@ class BasicUploadView(View):
         Photo.objects.filter(id=photo_id).delete()
         data = {'success': True}
         return JsonResponse(data)
+
+
+def pound_images_clear(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    if request.method == "POST":
+        print('here')
+        pound_id = request.POST['pound_id']
+        Photo.objects.filter(pound_id=pound_id).delete()
+        return redirect('pound_show', id=pound_id)
