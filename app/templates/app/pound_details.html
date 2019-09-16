@@ -9,9 +9,11 @@
 {% include 'app/map_review_show.html' %}
 {% endblock %}
 
+
+
 {% block content %}
 
-<h3>{{pound.name}} </h3>
+<h2>{{pound.name}} </h2>
 {% include 'app/weather.html' %}
 {% if 'app.add_pound' in perms %}
 {# 1. BUTTON TO TRIGGER THE ACTION #}
@@ -26,12 +28,22 @@
        data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}", "pound" : "{{pound.id}}"}'>
 {% endif %}
 {# 3. TABLE TO DISPLAY THE UPLOADED PHOTOS #}
-<div id="gallery" class="fotorama"
-     data-width="600" data-height="400" data-navposition="bottom" data-allowfullscreen="native" data-nav="thumbs" fit="contain">
-    {% for photo in photos %}
-        <img src = '{{ photo.file.url }}' id="photo_container_{{photo.id}}">
-    {% endfor %}
-</div>
+                <div class = "row justify-content-around">
+                    <div class="col-lg-6 col-md-6 col-xs-12 py-2">
+                        <h3>Фотографии</h3>
+                        <div id="gallery" class="fotorama"
+                             data-width="300" data-height="200" data-navposition="bottom" data-allowfullscreen="native" data-nav="thumbs" data-fit="contain">
+                            {% for photo in photos %}
+                                <img src = '{{ photo.file.url }}' id="photo_container_{{photo.id}}">
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-12 py-2">
+                        <h3>Координаты</h3>
+                        <div id="map1"></div>
+                    </div>
+                </div>
 {% if 'app.delete_pound' in perms %}
 <form action="/pounds/clearphotos/" method="post">
     {% csrf_token %}
@@ -42,8 +54,6 @@
 
 
 <div>{{pound.description|safe}}</div>
-
-<div id="map1"></div>
 
 <div class="reviews_main">
     Обзоры:
