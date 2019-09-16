@@ -22,9 +22,10 @@
        data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}", "pound" : "{{pound.id}}"}'>
 
 {# 3. TABLE TO DISPLAY THE UPLOADED PHOTOS #}
-<div id="gallery" class="fotorama" data-allowfullscreen="native">
+<div id="gallery" class="fotorama"
+     data-width="600" data-height="400" data-navposition="bottom" data-allowfullscreen="native" data-nav="thumbs" fit="contain">
     {% for photo in photos %}
-        <img src = '{{ photo.file.url }}' class = 'pound_details_photo' id="photo_container_{{photo.id}}">
+        <img src = '{{ photo.file.url }}' id="photo_container_{{photo.id}}">
     {% endfor %}
 </div>
 
