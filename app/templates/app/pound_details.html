@@ -10,6 +10,10 @@
 {% endblock %}
 
 {% block content %}
+
+<h3>{{pound.name}} </h3>
+{% include 'app/weather.html' %}
+{% if 'app.add_pound' in perms %}
 {# 1. BUTTON TO TRIGGER THE ACTION #}
 <button type="button" class="btn btn-primary js-upload-photos">
   <span class="glyphicon glyphicon-cloud-upload"></span> Upload photos
@@ -20,7 +24,7 @@
        style="display: none;"
        data-url="{% url 'basic_upload' %}"
        data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}", "pound" : "{{pound.id}}"}'>
-
+{% endif %}
 {# 3. TABLE TO DISPLAY THE UPLOADED PHOTOS #}
 <div id="gallery" class="fotorama"
      data-width="600" data-height="400" data-navposition="bottom" data-allowfullscreen="native" data-nav="thumbs" fit="contain">
@@ -28,15 +32,15 @@
         <img src = '{{ photo.file.url }}' id="photo_container_{{photo.id}}">
     {% endfor %}
 </div>
-
+{% if 'app.delete_pound' in perms %}
 <form action="/pounds/clearphotos/" method="post">
     {% csrf_token %}
     <input type="hidden" value="{{ pound.id }}" name="pound_id">
     <input type="submit" value="Удалить изображения"/>
 </form>
+{% endif %}
 
-{% include 'app/weather.html' %}
-<h3>Водоем: </h3>
+
 <div>{{pound.description|safe}}</div>
 
 <div id="map1"></div>
