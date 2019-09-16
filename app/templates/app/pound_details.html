@@ -20,15 +20,16 @@
        data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}", "pound" : "{{pound.id}}"}'>
 
 {# 3. TABLE TO DISPLAY THE UPLOADED PHOTOS #}
-<div id="gallery" style="display: inline-flex">
+<div id="gallery" class = "row justify-content-around">
     {% for photo in photos %}
-        <div id="photo_container_{{photo.id}}">
-        <a href="{{ photo.file.url }}"><img src = '{{ photo.file.url }}' class = "fish_icon_medium"></a>
-
-            <button class = "delete" id="{{photo.id}}">
+        <div id="photo_container_{{photo.id}}" class = "col-lg-4 col-md-6 col-xs-12 py-2 pound_photo_container">
+        <a href="{{ photo.file.url }}"><img src = '{{ photo.file.url }}' class = 'pound_details_photo'></a>
+        <button class = "delete" id="{{photo.id}}">
                 delete
-            </button>
+          </button>
+
         </div>
+
     {% endfor %}
 </div>
 

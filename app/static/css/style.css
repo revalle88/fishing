@@ -137,3 +137,12 @@ text-decoration: none;
     font-size: 14px;
     color: rgba(0,0,0,.54) !important
 }
+
+.pound_photo_container {
+    height = 200px;
+    overflow: hidden;
+}
+
+.pound_details_photo {
+    width: 100%;
+}
