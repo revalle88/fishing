@@ -10,30 +10,38 @@
 {% endblock %}
 <body>
     <div class="blog-masthead">
-      <div class="container py-1">
-          <div class ="row">
-              <div class = "col-4">
-                <a class = "header_link" href="mailto:revalle88@gmail.com">связаться с нами</a>
+      <div class="container fill">
+          <div class ="row fill">
+              <div class = "col-4 mail_to">
+                  <nav  class="navbar">
+                        <a class = "header_link" href="mailto:revalle88@gmail.com">связаться с нами</a>
+                  </nav>
               </div>
               <div class = "col">
 
               </div>
               <div class = "col-4">
+                   <nav  class="navbar">
                  {% if user.is_authenticated %}
                         Здравствуй, {{ user.username }}!
                         <a href="{% url 'logout' %}" class = "header_link">Выйти</a>
                     {% else %}
                         <a href="{% url 'login' %}" class = "header_link">Войти</a>
                  {% endif %}
+                   </nav>
               </div>
           </div>
       </div>
     </div>
     <div class="main-menu-tab">
-      <div class="container py-2">
-          <div class ="row">
-              <div class = "col-4 py-2">
-                  <a href = "{% url 'home' %}" class = "logo_text">GeoРЫБА:</a>
+      <div class="container main_menu_container">
+          <div class ="row fill">
+              <div class = "col-4 logo_container fill">
+                  <nav  class="navbar">
+                  <a href = "{% url 'home' %}" class = "logo_text">
+                  GeoFishing
+                  </a>
+                  </nav>
               </div>
               <div class = "col-8">
                     <nav class="navbar navbar-expand-sm">
