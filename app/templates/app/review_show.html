@@ -8,19 +8,22 @@
 {% endblock %}
 
 {% block page_title %}
-    Отчет по рыбалке
+    Отчет по рыбалке:  {{review.fishing_date}}
 {% endblock %}
 
 
 {% block content %}
-    <div class = "row align-items-center">
-
+    <div class = "row">
         <div class="col-lg-6 col-md-8 col-xs-12 py-2 ">
+            <h4>информация:</h4>
             <div class = "author_name">
                 рыбак: {{review.author.username}}
             </div>
             <div class = "review_date">
-                {{review.fishing_date}}
+
+            </div>
+            <div class = "review_method">
+                метод: {{review.method.name}}
             </div>
             <div class = "photoes">
                         <img src = "{{review.picture.url}}" class = "review_photo">{{fish.name}}
@@ -29,15 +32,14 @@
                 длина {{review.length}} см<br>
                 вес {{review.weight}} кг<br>
             </div>
-            <div class = "review_method">
-                метод: {{review.method.name}}
-            </div>
 
+            <h4>Описание:</h4>
             <div>{{review.content}}</div>
         </div>
         <div class = "col-lg-4 col-md-4 col-xs-12 py-2">
-            <div id="map1"></div>
             {% include 'app/weather.html' %}
+            <div id="map1"></div>
+
         </div>
     </div>
 <!--<div>-->
