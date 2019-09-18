@@ -55,8 +55,16 @@
 </form>
 {% endif %}
 
+<h3>Обитает рыба:</h3>
+<div class="pound_fishes">
+    {% for fish in fishes %}
+    {{fish.name}}
+    {% endfor %}
+</div>
+
 <h3>Описание</h3>
 <div>{{pound.description|safe}}</div>
+
 
 
 <h3>Недавно поймали:</h3>

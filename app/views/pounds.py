@@ -22,10 +22,11 @@ def pound_show(request, slug):
     reviews = Review.objects.filter(pound=pound)
     weather = WeatherManager().get_weather(pound.lat, pound.lang)
     photos_list = Photo.objects.filter(pound_id=pound.id)
+    fishes = pound.fishes.all()
     return render(
         request,
         'app/pound_details.html',
-        {"pound": pound, "point": point, "reviews": reviews, "weather": weather, "photos": photos_list}
+        {"pound": pound, "point": point, "reviews": reviews, "weather": weather, "photos": photos_list, "fishes": fishes}
     )
 
 
