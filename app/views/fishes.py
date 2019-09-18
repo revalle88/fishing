@@ -11,6 +11,6 @@ def fishes_list(request):
     return render(request, 'app/fish_list.html', {"fishes": fishes})
 
 
-def fish_details(request, id):
-    fish = Fish.objects.filter(id=id)[0]
+def fish_details(request, slug):
+    fish = Fish.objects.filter(slug=slug)[0]
     return render(request, 'app/fish_details.html', {"fish": fish})

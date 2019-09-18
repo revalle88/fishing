@@ -15,7 +15,7 @@ function init () {
     myMap.geoObjects
         {% for review in reviews %}
         .add(new ymaps.Placemark([parseFloat("{{review.lat}}".replace(",",".")), parseFloat("{{review.lang}}".replace(",","."))], {
-            balloonContent: "{{review.fishing_date}}<br>Поймано: <a href = {% url 'fish_details' review.fish_caught.id %}>{{review.fish_caught.name}}</a><br><a href = {% url 'review_show' review.id %}>Детали...</a>"
+            balloonContent: "{{review.fishing_date}}<br>Поймано: <a href = {% url 'fish_details' review.fish_caught.slug %}>{{review.fish_caught.name}}</a><br><a href = {% url 'review_show' review.id %}>Детали...</a>"
         }, {
             iconLayout: 'default#image',
             iconImageHref: '{% static "images/icons/catch_icon.png" %}',
@@ -26,7 +26,7 @@ function init () {
         {% endfor %}
         {% for pound in pounds %}
         .add(new ymaps.Placemark([parseFloat("{{pound.lat}}".replace(",",".")), parseFloat("{{pound.lang}}".replace(",","."))], {
-            balloonContent: "<a href = {% url 'pound_show' pound.id %}>{{pound.name}} - {{pound.is_paid}}</a>"
+            balloonContent: "<a href = {% url 'pound_show' pound.slug %}>{{pound.name}} - {{pound.is_paid}}</a>"
         }, {
             iconLayout: 'default#image',
             iconImageHref: '{% static "images/icons/pound_icon.png" %}',

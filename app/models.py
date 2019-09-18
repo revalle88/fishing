@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
 from django.db import models
+from django.utils.text import slugify
 from django.utils.timezone import now
 
 
@@ -34,6 +35,7 @@ class Fish(models.Model):
     description = models.TextField(blank=True, null=True)
     picture = models.ImageField(upload_to='fishes', default='fishes/no-img.jpg')
     catch_ease = models.CharField(max_length=1, default=MEDIUM, choices=CATCH_EASE)
+    slug = models.SlugField(verbose_name='URL', max_length=50, blank=True)
 
     def __str__(self):
         return self.name
@@ -60,6 +62,7 @@ class Pound(models.Model):
     is_paid = models.BooleanField(default=False)
     contacts = models.CharField(blank=True, max_length=200)
     conditions = models.CharField(blank=True, max_length=400)
+    slug = models.SlugField(verbose_name='URL', max_length=50, blank=True)
 
     def __str__(self):
         return self.name

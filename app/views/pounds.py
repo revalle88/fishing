@@ -15,12 +15,13 @@ def pound_list(request):
     return render(request, 'app/pound_list.html', {"pounds": pounds})
 
 
-def pound_show(request, id):
-    pound = Pound.objects.filter(id=id)[0]
+def pound_show(request, slug):
+    print("Нахуй ты сюда идешь?")
+    pound = Pound.objects.filter(slug=slug)[0]
     point = {"lat": pound.lat, "lang": pound.lang}
     reviews = Review.objects.filter(pound=pound)
     weather = WeatherManager().get_weather(pound.lat, pound.lang)
-    photos_list = Photo.objects.filter(pound_id=id)
+    photos_list = Photo.objects.filter(pound_id=pound.id)
     return render(
         request,
         'app/pound_details.html',
@@ -37,6 +38,7 @@ def pound_new(request):
             pound = form.save(commit=False)
             pound.author = request.user
             pound.save()
+            form.save_m2m()
             return redirect('pounds')
     else:
         lat = request.GET.get('lat', 'lat none')

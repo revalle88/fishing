@@ -9,7 +9,7 @@
     {% for fish in fishes %}
             <div class="col-lg-4 col-md-6 col-xs-12 py-2 blog_article">
 
-                <a href = "{% url 'fish_details' fish.id %}">
+                <a href = "{% url 'fish_details' fish.slug %}">
                 {{fish.name}}
                     <div><img src = "{{fish.picture.url}}" class = "fish_icon_medium"></div>
 

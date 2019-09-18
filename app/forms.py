@@ -13,7 +13,7 @@ class PoundForm(forms.ModelForm):
     class Meta:
         model = Pound
         fields = (
-            'lat', 'lang', 'name', 'description', 'fishes', 'is_paid',  'contacts', 'conditions'
+            'lat', 'lang', 'name', 'slug', 'description', 'fishes', 'is_paid',  'contacts', 'conditions'
         )
 
         widgets = {

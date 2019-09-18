@@ -4,7 +4,7 @@ from django.views import View
 from django.http import QueryDict
 
 from ..forms import PhotoForm
-from ..models import Photo
+from ..models import Photo, Pound
 
 
 class BasicUploadView(View):
@@ -31,11 +31,11 @@ class BasicUploadView(View):
         return JsonResponse(data)
 
 
-def pound_images_clear(request):
+def pound_images_clear(request, slug):
     if not request.user.is_authenticated:
         return redirect('login')
     if request.method == "POST":
-        print('here')
+        print(request.POST['pound_id'])
         pound_id = request.POST['pound_id']
         Photo.objects.filter(pound_id=pound_id).delete()
-        return redirect('pound_show', id=pound_id)
+        return redirect('pound_show', slug=slug)

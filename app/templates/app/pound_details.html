@@ -48,7 +48,7 @@
                     </div>
                 </div>
 {% if 'app.delete_pound' in perms %}
-<form action="/pounds/clearphotos/" method="post">
+<form action="/pounds/{{pound.slug}}/clearphotos/" method="post">
     {% csrf_token %}
     <input type="hidden" value="{{ pound.id }}" name="pound_id">
     <input type="submit" value="Удалить изображения"/>
