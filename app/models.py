@@ -47,6 +47,10 @@ class Fish(models.Model):
         verbose_name = 'Рыба'
         verbose_name_plural = 'Рыбы'
 
+    def save(self, *args, **kwargs):
+        if not self.id and not self.slug:
+            self.slug = slugify(self.name)
+        super(Fish, self).save(*args, **kwargs)
 
 
 # Create your models here.
@@ -73,6 +77,11 @@ class Pound(models.Model):
     class Meta:
         verbose_name = 'Пруд'
         verbose_name_plural = 'Пруды'
+
+    def save(self, *args, **kwargs):
+        if not self.id and not self.slug:
+            self.slug = slugify(self.name)
+        super(Pound, self).save(*args, **kwargs)
 
 
 class Photo(models.Model):
