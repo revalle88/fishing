@@ -3,39 +3,54 @@
 ymaps.ready(init);
 var myMap;
 var a = "{% url 'pounds' %}";
-function init () {
-    myMap = new ymaps.Map("map", {
-        center: [53.2262, 45.3061], // Углич
-        zoom: 11
-    }, {
-        balloonMaxWidth: 200,
-        searchControlProvider: 'yandex#search'
-    }),
 
-    myMap.geoObjects
-        {% for review in reviews %}
-        .add(new ymaps.Placemark([parseFloat("{{review.lat}}".replace(",",".")), parseFloat("{{review.lang}}".replace(",","."))], {
-            balloonContent: "{{review.fishing_date}}<br>Поймано: <a href = {% url 'fish_details' review.fish_caught.slug %}>{{review.fish_caught.name}}</a><br><a href = {% url 'review_show' review.id %}>Детали...</a>"
-        }, {
-            iconLayout: 'default#image',
-            iconImageHref: '{% static "images/icons/catch_icon.png" %}',
-            iconImageSize: [24, 24],
-            iconImageOffset: [-10, -5]
+// Куки для CRSF токена
+function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1) {
+            c_start = c_start + c_name.length + 1;
+            c_end = document.cookie.indexOf(";", c_start);
+            if (c_end == -1) c_end = document.cookie.length;
+            return unescape(document.cookie.substring(c_start,c_end));
         }
-        ))
-        {% endfor %}
-        {% for pound in pounds %}
-        .add(new ymaps.Placemark([parseFloat("{{pound.lat}}".replace(",",".")), parseFloat("{{pound.lang}}".replace(",","."))], {
-            balloonContent: "<a href = {% url 'pound_show' pound.slug %}>{{pound.name}} - {{pound.is_paid}}</a>"
+    }
+    return "";
+}
+
+function init () {
+    var myMap = new ymaps.Map('map', {
+            center: [55.76, 37.64],
+            zoom: 10
         }, {
-            iconLayout: 'default#image',
-            iconImageHref: '{% static "images/icons/pound_icon.png" %}',
-            iconImageSize: [20, 20],
-            iconImageOffset: [-10, -5]
-        }))
-        {% endfor %}
+            searchControlProvider: 'yandex#search'
+        }),
+        objectManager = new ymaps.ObjectManager({
+            // Чтобы метки начали кластеризоваться, выставляем опцию.
+            clusterize: true,
+            // ObjectManager принимает те же опции, что и кластеризатор.
+            gridSize: 32,
+            geoObjectOpenBalloonOnClick: true,
+            clusterOpenBalloonOnClick: false
+        });
 
 
+
+    // Чтобы задать опции одиночным объектам и кластерам,
+    // обратимся к дочерним коллекциям ObjectManager.
+    objectManager.objects.options.set('preset', 'islands#greenDotIcon');
+    objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
+    myMap.geoObjects.add(objectManager);
+
+
+    $.ajax({
+        url: "json/addobjects/",
+        type: "POST",
+        headers: { "X-CSRFToken": getCookie("csrftoken") },
+    }).done(function(data) {
+        alert("DONE");
+        objectManager.add(data);
+    });
 
 
 
@@ -79,10 +94,11 @@ function init () {
 
 
 
-
-
-
 }
+
+
+
+
 
 </script>
 

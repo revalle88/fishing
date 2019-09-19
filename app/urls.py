@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^test/$', views.bootstrap_test, name='bootstrap_test'),
     url(r'^basic-upload/$', views.BasicUploadView.as_view(), name='basic_upload'),
-    path("pounds/<slug:slug>/clearphotos/", views.pound_images_clear, name='clear_pound_photos')
+    path("pounds/<slug:slug>/clearphotos/", views.pound_images_clear, name='clear_pound_photos'),
+    path("json/addobjects/", views.MapRenderView.as_view(), name='add_objects')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
