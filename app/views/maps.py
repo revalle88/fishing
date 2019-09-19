@@ -13,11 +13,12 @@ class MapRenderView(View):
         print('here AJAX!!!')
         # print(reverse('fish_details', 'carp'))
         features = []
+        geo_id = 0
         #add reviews
         for review in reviews:
             item = {
                 "type": "Feature",
-                "id": review.id,
+                "id": geo_id,
                 "geometry": {
                     "type": "Point",
                     "coordinates": [review.lat, review.lang]
@@ -29,11 +30,13 @@ class MapRenderView(View):
                 }
             }
             features.append(item)
+            geo_id = geo_id + 1
         # add pounds
         for pound in pounds:
+            print(geo_id)
             item = {
                 "type": "Feature",
-                "id": pound.id,
+                "id": geo_id,
                 "geometry": {
                     "type": "Point",
                     "coordinates": [pound.lat, pound.lang]
@@ -51,6 +54,7 @@ class MapRenderView(View):
                 # }
             }
             features.append(item)
+            geo_id = geo_id + 1
         data = {"type": "FeatureCollection", "features": features}
         return JsonResponse(data)
 
