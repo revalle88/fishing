@@ -47,7 +47,6 @@ function init () {
         type: "POST",
         headers: { "X-CSRFToken": getCookie("csrftoken") },
     }).done(function(data) {
-        alert("DONE");
         objectManager.add(data);
     });
 

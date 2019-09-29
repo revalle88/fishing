@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.urls import reverse
 from django.views import View
 
+from app.filters import ReviewFilter
 from app.models import Review, Pound
 
 
@@ -11,6 +12,7 @@ class MapRenderView(View):
         reviews = Review.objects.all()
         pounds = Pound.objects.all()
         print('here AJAX!!!')
+        print(request.GET)
         # print(reverse('fish_details', 'carp'))
         features = []
         geo_id = 0
@@ -27,6 +29,12 @@ class MapRenderView(View):
                     "balloonContent": str(review.fishing_date)+"<br>Поймано: <a href = 'fishes/"+review.fish_caught.slug+"'>"+review.fish_caught.name+"</a><br><a href = 'reviews/"+str(review.id)+"'>Детали...</a>",
                     "clusterCaption": "Еще одна метка",
                     "hintContent": "Текст подсказки"
+                },
+                "options": {
+                    "iconLayout": 'default#image',
+                    "iconImageHref": static('images/icons/catch_icon.png'),
+                    "iconImageSize": [24, 24],
+                    "iconImageOffset": [-10, -5],
                 }
             }
             features.append(item)
@@ -45,13 +53,13 @@ class MapRenderView(View):
                     "balloonContent": "<a href = 'pounds/"+pound.slug+"'>"+pound.name+"</a>",
                     "clusterCaption": "Еще одна метка",
                     "hintContent": "Текст подсказки",
+                },
+                "options": {
+                    "iconLayout": 'default#image',
+                    "iconImageHref": static('images/icons/pound_icon.png'),
+                    "iconImageSize": [24, 24],
+                    "iconImageOffset": [-10, -5],
                 }
-                # "options": {
-                #     "iconLayout": 'default#image',
-                #     "iconImageHref": static('catch_icon.png'),
-                #     "iconImageSize": [24, 24],
-                #     "iconImageOffset": [-10, -5],
-                # }
             }
             features.append(item)
             geo_id = geo_id + 1
