@@ -8,6 +8,7 @@
 
 {% endblock %}
 
+
 {% block map %}
     <div id="new_point">
     </div>
@@ -24,30 +25,15 @@
 
 
     <br>
-  <form method="get">
-      <div>Параметры поиска:     <button type="submit">Применить</button> </div>
-<!--    {{ filter.form.as_p }}-->
-      <div class = "row">
-          <div class="col-lg-3 col-md-6 col-xs-12 py-2">
-            рыба поймана: {{filter.form.fish_caught}}
-          </div>
-          <div class="col-lg-3 col-md-6 col-xs-12 py-2">
-            метод ловли: {{filter.form.method}}
-          </div>
-          <div class="col-lg-3 col-md-6 col-xs-12 py-2">
-            дата вылова: {{filter.form.fishing_date}}
-          </div>
-          <div class="col-lg-3 col-md-6 col-xs-12 py-2">
-            водоем: {{filter.form.pound}}
-          </div>
+    <form method = "post">
+        {% csrf_token %}
+        {{map_filter.as_p}}
+        <button type="submit">Применить</button> </div>
+    </form>
 
-      </div>
-
-  </form>
 {% if has_filter %}
   <a href="{%  url 'home' %}"> Очистить фильтр </a>
 {% endif %}
-
 
 
 <!--<div class="reviews_main">-->

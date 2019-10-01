@@ -40,12 +40,14 @@ function init () {
     objectManager.objects.options.set('preset', 'islands#greenDotIcon');
     objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
     myMap.geoObjects.add(objectManager);
-
-
+    var fish_filter = "{{fish_filter}}";
+    var method_filter = "{{method_filter}}";
+    var entity_filter = "{{entity_filter}}";
     $.ajax({
         url: "json/addobjects/",
         type: "POST",
         headers: { "X-CSRFToken": getCookie("csrftoken") },
+        data: {fish_filter: fish_filter, method_filter: method_filter, entity_filter: entity_filter}
     }).done(function(data) {
         objectManager.add(data);
     });
