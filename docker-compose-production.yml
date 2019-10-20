@@ -9,16 +9,14 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=fishing
-      - POSTGRES_PASSWORD=fishing
-      - POSTGRES_DB=fishing
+      - POSTGRES_USER=prod_user
+      - POSTGRES_PASSWORD=dreamlord88
+      - POSTGRES_DB=prod_db
 
   geofishing:
     build: .
     image: revalle88/geofishing_app
     container_name: geofishing_app
-    environment:
-      - DJANGO_DEBUG=True
     volumes:
       - ./fishing:/app/fishing
       - ./app:/app/app
@@ -26,7 +24,7 @@ services:
       - ./media:/app/media
     ports:
       - 6556:6556
-    command: python manage.py runserver 0.0.0.0:6556
+    command: gunicorn fishing.wsgi:application --bind 0.0.0.0:6556 --workers 3
     entrypoint:
       - /app/entry_point.sh
     depends_on:
