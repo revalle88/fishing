@@ -137,7 +137,8 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
+print("DEBUG")
+print(DEBUG)
 if not DEBUG:
     DATABASES = {
         'default': {
@@ -145,7 +146,7 @@ if not DEBUG:
             'NAME': 'prod_db',
             'USER': 'prod_user',
             'PASSWORD': 'dreamlord88',
-            'HOST': '127.0.0.1',
+            'HOST': 'db',
             'PORT': '5432',
         }
     }
