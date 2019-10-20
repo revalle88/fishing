@@ -3,7 +3,6 @@ services:
   db:
     image: postgres
     container_name: geofishing_db
-    env_file: .env
     ports:
       - "5436:5432"
     volumes:
