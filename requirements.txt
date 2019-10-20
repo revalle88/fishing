@@ -11,6 +11,8 @@ Django~=2.1.7
 django-debug-toolbar==1.9.1
 django-summernote==0.8.11.4
 djangorestframework==3.9.1
+django-bootstrap-datepicker-plus
+django-bootstrap4
 entrypoints==0.3
 enum34==1.1.6
 geojson==2.4.1
@@ -28,6 +30,7 @@ jupyter-client==5.2.4
 jupyter-core==4.4.0
 MarkupSafe==1.1.0
 mistune==0.8.4
+pymongo
 nbconvert==5.4.0
 nbformat==4.4.0
 notebook==5.7.4
@@ -47,6 +50,7 @@ python-dateutil==2.7.5
 python-openid==2.2.5
 pytz==2018.9
 pyzmq==17.1.2
+redis==2.10.3
 requests==2.21.0
 requests-oauthlib==1.2.0
 scandir==1.9.0
@@ -61,7 +65,9 @@ testpath==0.4.2
 tornado==5.1.1
 traitlets==4.3.2
 urllib3==1.24.1
+wagtail
 wcwidth==0.1.7
 webencodings==0.5.1
 whitenoise==4.1.2
 widgetsnbextension==3.4.2
+django-filter

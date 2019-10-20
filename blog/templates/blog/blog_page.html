@@ -1,0 +1,31 @@
+{% extends "app/base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags%}
+{% block body_class %}template-blogpage{% endblock %}
+
+
+{% block content %}
+    {# Check if there are tags #}
+    {% if page.tags.count %}
+        <h1>Tags:</h1>
+        {% for tag in page.tags.all %}
+            {# Loop through all the existing tags #}
+            <a href="{% routablepageurl blog_page 'post_by_tag' tag.slug %}">{{ tag }}</a><br />
+        {% endfor %}
+    {% endif %}
+
+    <h1>{{ page.title }}</h1>
+
+    {% if page.main_image %}
+        {% image page.main_image width-500 %}
+    {% endif %}
+
+    <p class="meta">{{ page.date }}</p>
+
+    <div class="intro">{{ page.intro }}</div>
+
+    {{ page.body|richtext }}
+
+    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+
+{% endblock %}

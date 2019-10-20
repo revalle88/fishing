@@ -8,11 +8,13 @@
 
 {% endblock %}
 
+
 {% block map %}
     <div id="new_point">
     </div>
         <div id="map"></div>
 {% endblock %}
+
 
 {% block page_title %}
     Главная
@@ -22,20 +24,23 @@
 {% block content %}
 
 
+    <br>
+    <form method = "post">
+        {% csrf_token %}
+        {{map_filter.as_p}}
+        <button type="submit">Применить</button> </div>
+    </form>
 
-<div class = "row justify-content-around">
-    {% for fish in fishes %}
-        <div class="col-lg-3 col-md-6 col-xs-12"><a href = "{% url 'fish_details' fish.id %}"><img src = "{{fish.picture.url}}" class = "fish_icon">{{fish.name}}</a></div>
-    {% endfor %}
+{% if has_filter %}
+  <a href="{%  url 'home' %}"> Очистить фильтр </a>
+{% endif %}
 
 
-</div>
-
-<div class="reviews_main">
-    Обзоры:
-    {% for review in reviews %}
-    <li><a href = "{% url 'review_show' review.id %}">{{review.author.username}}  {{review.fishing_date}} </a></li>
-    {% endfor %}
-</div>
+<!--<div class="reviews_main">-->
+<!--    Последние уловы:-->
+<!--    {% for review in reviews %}-->
+<!--    <li><a href = "{% url 'review_show' review.id %}">{{review.author.username}}  {{review.fishing_date}} </a></li>-->
+<!--    {% endfor %}-->
+<!--</div>-->
 
 {% endblock %}

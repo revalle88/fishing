@@ -1,35 +1,56 @@
+{% load static %}
 <script>
 ymaps.ready(init);
 var myMap;
 var a = "{% url 'pounds' %}";
+
+// Куки для CRSF токена
+function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1) {
+            c_start = c_start + c_name.length + 1;
+            c_end = document.cookie.indexOf(";", c_start);
+            if (c_end == -1) c_end = document.cookie.length;
+            return unescape(document.cookie.substring(c_start,c_end));
+        }
+    }
+    return "";
+}
+
 function init () {
-    myMap = new ymaps.Map("map", {
-        center: [53.2262, 45.3061], // Углич
-        zoom: 11
-    }, {
-        balloonMaxWidth: 200,
-        searchControlProvider: 'yandex#search'
-    }),
-
-    myMap.geoObjects
-        {% for review in reviews %}
-        .add(new ymaps.Placemark([parseFloat("{{review.lat}}".replace(",",".")), parseFloat("{{review.lang}}".replace(",","."))], {
-            balloonContent: "{{review.created_date}}<br><a href = {% url 'review_show' review.id %}>инфо</a>"
+    var myMap = new ymaps.Map('map', {
+            center: [55.76, 37.64],
+            zoom: 10
         }, {
-            preset: 'islands#icon',
-            iconColor: '#0095b6'
-        }))
-        {% endfor %}
-        {% for pound in pounds %}
-        .add(new ymaps.Placemark([parseFloat("{{pound.lat}}".replace(",",".")), parseFloat("{{pound.lang}}".replace(",","."))], {
-            balloonContent: "<a href = {% url 'pound_show' pound.id %}>{{pound.name}} - {{pound.is_paid}}</a>"
-        }, {
-            preset: 'islands#circleDotIcon',
-            iconColor: 'green'
-        }))
-        {% endfor %}
+            searchControlProvider: 'yandex#search'
+        }),
+        objectManager = new ymaps.ObjectManager({
+            // Чтобы метки начали кластеризоваться, выставляем опцию.
+            clusterize: true,
+            // ObjectManager принимает те же опции, что и кластеризатор.
+            gridSize: 32,
+            geoObjectOpenBalloonOnClick: true,
+            clusterOpenBalloonOnClick: false
+        });
 
 
+    // Чтобы задать опции одиночным объектам и кластерам,
+    // обратимся к дочерним коллекциям ObjectManager.
+    objectManager.objects.options.set('preset', 'islands#greenDotIcon');
+    objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
+    myMap.geoObjects.add(objectManager);
+    var fish_filter = "{{fish_filter}}";
+    var method_filter = "{{method_filter}}";
+    var entity_filter = "{{entity_filter}}";
+    $.ajax({
+        url: "json/addobjects/",
+        type: "POST",
+        headers: { "X-CSRFToken": getCookie("csrftoken") },
+        data: {fish_filter: fish_filter, method_filter: method_filter, entity_filter: entity_filter}
+    }).done(function(data) {
+        objectManager.add(data);
+    });
 
 
 
@@ -45,12 +66,11 @@ function init () {
             var new_pound_url = "{% url 'pound_new' %}"+"?lat="+coords[0]+"&lang="+coords[1];
 
             myMap.balloon.open(coords, {
-                contentHeader:'Событие!',
                 contentBody:
-                    '<p>Координаты щелчка: ' + [
+                    '<p>Координаты : <br>' + [
                     coords[0].toPrecision(6),
                     coords[1].toPrecision(6)
-                    ].join(', ') + '</p>',
+                    ].join('<br>') + '</p>',
                 contentFooter: "<a href="+myurl+">Добавить точку ловли</a><br><a href="+new_pound_url+">Добавить водоем</a>"
             });
         }
@@ -74,10 +94,11 @@ function init () {
 
 
 
-
-
-
 }
+
+
+
+
 
 </script>
 

@@ -26,7 +26,7 @@ SECRET_KEY = '5z$2@b*v-)$69n0f5r9%q4sr(0q!ghr4g1xh34y(a5b=tpqu%z'
 
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
 # DEBUG = True
-ALLOWED_HOSTS = ['young-refuge-68970.herokuapp.com', '127.0.0.1', '94.242.59.230', '0.0.0.0']
+ALLOWED_HOSTS = ['young-refuge-68970.herokuapp.com', '127.0.0.1', '94.242.59.230', '0.0.0.0', '94.242.58.10']
 
 
 # Application definition
@@ -42,11 +42,27 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'social_django',
     'app',
+    'blog',
     'debug_toolbar',
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail.core',
+    'wagtail.contrib.routable_page',
+    'taggit',
+    'modelcluster',
+    'bootstrap_datepicker_plus',
+    'bootstrap4',
 ]
 
 INSTALLED_APPS += ('django_summernote', )
-
 
 
 MIDDLEWARE = [
@@ -59,6 +75,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'wagtail.core.middleware.SiteMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 
@@ -209,6 +228,11 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
@@ -246,3 +270,9 @@ def show_toolbar(request):
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': show_toolbar,
 }
+
+WAGTAIL_SITE_NAME = 'GeoFishing'
+
+REDIS_URI = 'redis://redis/1'
+
+MONGO_URI = 'mongodb'

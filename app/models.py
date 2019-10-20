@@ -4,6 +4,29 @@ from __future__ import unicode_literals
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
 from django.db import models
+from django.utils.text import slugify
+from django.utils.timezone import now
+
+
+EASY = 'E'
+MEDIUM = 'M'
+HARD = 'H'
+CATCH_EASE = ((EASY, 'легко'), (MEDIUM, 'средне'), (HARD, 'сложно'))
+# CATCH_EASE = {EASY: 'легко', MEDIUM: 'средне', HARD: 'сложно'}
+
+
+class Method(models.Model):
+    name = models.CharField(max_length=200)
+    content = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Метод ловли'
 
 
 class Fish(models.Model):
@@ -11,6 +34,8 @@ class Fish(models.Model):
     short_desc = models.CharField(max_length=500, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     picture = models.ImageField(upload_to='fishes', default='fishes/no-img.jpg')
+    catch_ease = models.CharField(max_length=1, default=MEDIUM, choices=CATCH_EASE)
+    slug = models.SlugField(verbose_name='URL', max_length=50, blank=True)
 
     def __str__(self):
         return self.name
@@ -21,6 +46,11 @@ class Fish(models.Model):
     class Meta:
         verbose_name = 'Рыба'
         verbose_name_plural = 'Рыбы'
+
+    def save(self, *args, **kwargs):
+        if not self.id and not self.slug:
+            self.slug = slugify(self.name)
+        super(Fish, self).save(*args, **kwargs)
 
 
 # Create your models here.
@@ -36,6 +66,7 @@ class Pound(models.Model):
     is_paid = models.BooleanField(default=False)
     contacts = models.CharField(blank=True, max_length=200)
     conditions = models.CharField(blank=True, max_length=400)
+    slug = models.SlugField(verbose_name='URL', max_length=50, blank=True)
 
     def __str__(self):
         return self.name
@@ -47,89 +78,43 @@ class Pound(models.Model):
         verbose_name = 'Пруд'
         verbose_name_plural = 'Пруды'
 
+    def save(self, *args, **kwargs):
+        if not self.id and not self.slug:
+            self.slug = slugify(self.name)
+        super(Pound, self).save(*args, **kwargs)
 
-def get_image_filename(instance, filename):
-    slug = instance.review.id
-    return "review_images/%s-%s" % (slug, filename)
+
+class Photo(models.Model):
+    pound = models.ForeignKey(Pound, on_delete=models.CASCADE, default=1)
+    title = models.CharField(max_length=255, blank=True)
+    file = models.FileField(upload_to='pound_photos/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
 
 
 class Review(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    pound = models.ForeignKey(Pound, on_delete=models.CASCADE, blank=True, null=True)
+    # pound = models.ForeignKey(Pound, on_delete=models.CASCADE, blank=True, null=True, default=lambda: Pound.objects.all().first())
+    pound = models.ForeignKey(Pound, on_delete=models.CASCADE, blank=True, null=True, default=1)
     content = models.TextField()
-    fish_caught = models.ManyToManyField(Fish)
+    # fish_caught = models.ForeignKey(Fish, on_delete=models.CASCADE, blank=True, null=True, default=lambda: Fish.objects.all().first())
+    fish_caught = models.ForeignKey(Fish, on_delete=models.CASCADE, default=1)
     created_date = models.DateTimeField(
             default=timezone.now)
-    fishing_date = models.DateTimeField(
-            default=timezone.now)
-    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    # fishing_date = models.DateField(default=lambda: now().date())
+    fishing_date = models.DateField(default=timezone.now)
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], blank=True, null=True)
+    likes = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(9999)], blank=True, null=True)
     lang = models.FloatField(default=50)
     lat = models.FloatField(default=50)
+    picture = models.ImageField(upload_to='reviews', default='reviews/no-img.jpg')
+    length = models.FloatField(default=0)
+    weight = models.FloatField(default=0)
+    method = models.ForeignKey(Method, on_delete=models.CASCADE, default=1)
 
     def __unicode__(self):
         return str(self.id)
 
+
     class Meta:
         verbose_name = 'Обзор'
         verbose_name_plural = 'Обзоры'
-
-
-class Images(models.Model):
-    review = models.ForeignKey(Review, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='fishes',
-                              verbose_name='Image')
-
-
-class Tag(models.Model):
-    name = models.CharField(max_length=100)
-
-    class Meta:
-        verbose_name = 'Тэг'
-        verbose_name_plural = 'Тэги'
-
-
-class Category(models.Model):
-    name = models.CharField(max_length=100)
-    slug = models.CharField(max_length=100)
-
-    class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
-
-
-class Article(models.Model):
-    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    created_date = models.DateTimeField(
-        default=timezone.now)
-    published_date = models.DateTimeField(
-        default=timezone.now)
-    published = models.BooleanField(default=True)
-    name = models.CharField(max_length=200)
-    description = models.CharField(max_length=500, default='')
-    content = models.TextField(blank=True, null=True)
-    picture = models.ImageField(upload_to='blog')
-    tags = models.ManyToManyField(Tag)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
-
-    def __unicode__(self):
-        return str(self.name)
-
-
-    class Meta:
-        verbose_name = 'Статья'
-        verbose_name_plural = 'Статьи'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

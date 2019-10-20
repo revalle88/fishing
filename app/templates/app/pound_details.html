@@ -4,23 +4,84 @@
 {% block header %}
 <link rel="stylesheet" href="{% static 'css/ymaps.css' %}">
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=192262e9-5603-4065-bba8-83d9251843a9" type="text/javascript"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
 {% include 'app/map_review_show.html' %}
 {% endblock %}
 
+{% block page_title %}
+    Информация о водоеме
+{% endblock %}
+
+
 {% block content %}
-IT WORKS
-{{pound.lat}}
-{{pound.lang}}
-<h3>Review: </h3>
+
+<h2>{{pound.name}} </h2>
+{% include 'app/weather.html' %}
+{% if 'app.add_pound' in perms %}
+{# 1. BUTTON TO TRIGGER THE ACTION #}
+<button type="button" class="btn btn-primary js-upload-photos">
+  <span class="glyphicon glyphicon-cloud-upload"></span> Upload photos
+</button>
+<br>
+{# 2. FILE INPUT TO BE USED BY THE PLUG-IN #}
+<input id="fileupload" type="file" name="file" multiple
+       style="display: none;"
+       data-url="{% url 'basic_upload' %}"
+       data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}", "pound" : "{{pound.id}}"}'>
+{% endif %}
+{# 3. TABLE TO DISPLAY THE UPLOADED PHOTOS #}
+                <div class = "row justify-content-around">
+                    <div class="col-lg-6 col-md-6 col-xs-12 py-2">
+                        <h3>Фотографии</h3>
+                        <div id="gallery" class="fotorama"
+                             data-width="300" data-height="200" data-navposition="bottom" data-allowfullscreen="native" data-nav="thumbs" data-fit="contain">
+                            {% for photo in photos %}
+                                <img src = '{{ photo.file.url }}' id="photo_container_{{photo.id}}">
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-12 py-2">
+                        <h3>Координаты</h3>
+                        <div id="map1"></div>
+                    </div>
+                </div>
+{% if 'app.delete_pound' in perms %}
+<form action="/pounds/{{pound.slug}}/clearphotos/" method="post">
+    {% csrf_token %}
+    <input type="hidden" value="{{ pound.id }}" name="pound_id">
+    <input type="submit" value="Удалить изображения"/>
+</form>
+{% endif %}
+
+<h3>Обитает рыба:</h3>
+<div class="pound_fishes">
+    {% for fish in fishes %}
+    {{fish.name}}
+    {% endfor %}
+</div>
+
+<h3>Описание</h3>
 <div>{{pound.description|safe}}</div>
 
-<div id="map1"></div>
 
+
+<h3>Недавно поймали:</h3>
 <div class="reviews_main">
-    Обзоры:
     {% for review in reviews %}
     <li><a href = "{% url 'review_show' review.id %}">{{review.author.username}}  {{review.fishing_date}} </a></li>
     {% endfor %}
 </div>
 
+{% endblock %}
+
+{% block javascript_upload %}
+{# JQUERY FILE UPLOAD SCRIPTS #}
+<script src="{% static 'js/jquery-file-upload/jquery.ui.widget.js' %}"></script>
+<script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+<script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+
+{# PHOTOS PAGE SCRIPTS #}
+<script src="{% static 'js/basic-upload.js' %}"></script>
 {% endblock %}

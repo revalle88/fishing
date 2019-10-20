@@ -1,21 +1,27 @@
-version: '3.7'
+version: '3.3'
 services:
   db:
     image: postgres
     container_name: geofishing_db
     env_file: .env
+    ports:
+      - "5436:5432"
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
 
   geofishing:
     build: .
-    image: fishing_geofishing
-    container_name: geofishing
+    image: revalle88/geofishing_app
+    container_name: geofishing_app
     environment:
       - DJANGO_DEBUG=True
     volumes:
       - ./fishing:/app/fishing
       - ./app:/app/app
+      - ./blog:/app/blog
+      - ./media:/app/media
     ports:
-      - "6556:6556"
+      - 6556:6556
 #    command: gunicorn fishing.wsgi:application --bind 0.0.0.0:6556 --workers 3
     command: python manage.py runserver 0.0.0.0:6556
     entrypoint:
@@ -25,3 +31,16 @@ services:
     restart: always
     stdin_open: true
     tty: true
+
+  mongodb:
+      image: mongo:latest
+      container_name: geofishing_mongodb
+      hostname: mongodb
+      environment:
+        - MONGO_DATA_DIR=/data/db
+        - MONGO_LOG_DIR=/dev/null
+      volumes:
+        - ./data/mongo:/data/db
+      ports:
+          - 27027:27017
+      command: mongod --logpath=/dev/null # --quiet

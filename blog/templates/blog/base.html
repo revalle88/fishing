@@ -1,47 +1,35 @@
-{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
-{% bootstrap_css %}         {# Embed Bootstrap CSS #}
-{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
-{{ form.media }}            {# Adds date-picker required JS and CSS #}
-
 {% load static %}
 <html>
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 {% block header %}
 {% endblock %}
 <body>
     <div class="blog-masthead">
-      <div class="container fill">
-          <div class ="row fill">
-              <div class = "col-4 mail_to">
-                  <nav  class="navbar">
-                        <a class = "header_link" href="mailto:revalle88@gmail.com">связаться с нами</a>
-                  </nav>
+      <div class="container py-1">
+          <div class ="row">
+              <div class = "col-4">
+                <a class = "header_link" href="mailto:revalle88@gmail.com">связаться с нами</a>
               </div>
               <div class = "col">
 
               </div>
               <div class = "col-4">
-                   <nav  class="navbar">
                  {% if user.is_authenticated %}
                         Здравствуй, {{ user.username }}!
                         <a href="{% url 'logout' %}" class = "header_link">Выйти</a>
                     {% else %}
                         <a href="{% url 'login' %}" class = "header_link">Войти</a>
                  {% endif %}
-                   </nav>
               </div>
           </div>
       </div>
     </div>
     <div class="main-menu-tab">
-      <div class="container main_menu_container">
-          <div class ="row fill">
-              <div class = "col-4 logo_container fill">
-                  <nav  class="navbar">
-                  <a href = "{% url 'home' %}" class = "logo_text">
-                  GeoFishing
-                  </a>
-                  </nav>
+      <div class="container py-2">
+          <div class ="row">
+              <div class = "col-4 py-2">
+                  <a href = "{% url 'home' %}" class = "logo_text">GeoРЫБА:</a>
               </div>
               <div class = "col-8">
                     <nav class="navbar navbar-expand-sm">
@@ -54,10 +42,13 @@
                                 <a href = "{% url 'pounds' %}" class = "main_menu_item">Водоемы</a>
                               </li>
                               <li class="nav-item">
-                                <a href = "/pages/" class = "main_menu_item">Блог</a>
+                                <a href = "{% url 'articles' %}" class = "main_menu_item">Блог</a>
                               </li>
                               <li class="nav-item">
-                                <a href = '/' class = "main_menu_item">Карта</a>
+                                <a href = '#' class = "main_menu_item">Точки</a>
+                              </li>
+                              <li class="nav-item">
+                                <a href = '#' class = "main_menu_item">Карта</a>
                               </li>
 
                             </ul>
@@ -80,9 +71,15 @@
     <div class="breadcrumb-tab">
         <div class="container py-2">
             <div class ="row">
-              <div>
+              <div class = "col-2">
                 {% block page_title %}
                 {% endblock %}
+              </div>
+              <div class = "col">
+
+              </div>
+              <div class = "col-2">
+
               </div>
             </div>
         </div>
@@ -107,8 +104,7 @@
     </div>
 
 
-        {% block javascript_upload %}
-        {% endblock %}
+
 </body>
 
 </html>

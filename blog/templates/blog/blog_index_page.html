@@ -1,0 +1,47 @@
+{% extends "app/base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags%}
+{% block body_class %}template-blogindexpage{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-expand-sm">
+<ul class="navbar-nav w-100 justify-content-around">
+    <li class="nav-item"><a href ="{% routablepageurl blog_page 'post_list' %}" class="blog_menu_item">Все</a></li>
+    {% for category in categories %}
+        <li class="nav-item">
+           <a href="{% routablepageurl blog_page 'post_by_category' category.slug %}"> {{category.name}}</a>
+        </li>
+
+    {% endfor %}
+</ul>
+</nav>
+
+    <h1>{{ page.title }}</h1>
+
+    <div class="intro">{{ page.intro|richtext }}</div>
+
+    {% if request.GET.tag|length %}
+        <h4>Showing pages tagged "{{ request.GET.tag }}"</h4>
+    {% endif %}
+    <div class = "row justify-content-around">
+    {% for post in posts %}
+        <div class="col-lg-4 col-md-6 col-xs-12 py-2 blog_article">
+        <a href="{% pageurl post %}">
+
+        {% if post.main_image %}
+<!--            <div class = "blog-list-image" style="background-image: {{post.main_image.url}};"></div>-->
+            {% image post.main_image fill-300x200 %}
+        {% endif %}
+        <div class="article-name py-2">{{ post.title }}</div>
+        </a>
+        <div class = "short-descr">{{ post.specific.intro }}</div>
+        <div class = "post-date py-2">{{post.last_published_at}}</div>
+        </div>
+    {% empty %}
+        No pages found.
+    {% endfor %}
+     </div>
+{% endblock %}
+
+
+
