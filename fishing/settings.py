@@ -80,7 +80,7 @@ MIDDLEWARE = [
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
-
+USE_X_FORWARDED_HOST = True
 # if DEBUG:
 #     INSTALLED_APPS += ('debug_toolbar', )
 #     MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
@@ -170,6 +170,7 @@ SOCIAL_AUTH_VK_OAUTH2_SECRET = 'FFLxC4mBIzfudaDGqUOA'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='385275237268-mjv33ind8t7ql3kgg1m7q8ag28snldok.apps.googleusercontent.com'  #Paste CLient Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'jrRVvQ-mJT73vtES-PXAjvoh' #Paste Secret Key
+
 
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
