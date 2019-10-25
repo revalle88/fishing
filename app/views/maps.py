@@ -17,7 +17,7 @@ class MapRenderView(View):
 
         if len(request.POST.get('method_filter'))>0:
             method_filter_ids = request.POST.get('method_filter').split(',')
-            reviews = reviews.filter(fish_caught__in=method_filter_ids)
+            reviews = reviews.filter(method__in=method_filter_ids)
 
         if len(request.POST.get('entity_filter'))>0:
             entity_filter_types = request.POST.get('entity_filter').split(',')
