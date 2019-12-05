@@ -31,6 +31,6 @@ class ReviewFilter(django_filters.FilterSet):
 class MapFilter(forms.Form):
     method = forms.ModelMultipleChoiceField(queryset=Method.objects.all(), widget=forms.CheckboxSelectMultiple)
     fish_caught = forms.ModelMultipleChoiceField(queryset=Fish.objects.all(), widget=forms.CheckboxSelectMultiple)
-    entity_type = forms.MultipleChoiceField(choices = RELEVANCE_CHOICES, widget=forms.CheckboxSelectMultiple)
+    entity_type = forms.MultipleChoiceField(choices=RELEVANCE_CHOICES, widget=forms.CheckboxSelectMultiple)
 
 
