@@ -25,12 +25,11 @@
 
 
     <br>
-    <form method = "post">
+    <form method = "post" id = "filter_form">
         {% csrf_token %}
         {{map_filter.as_p}}
         <button type="submit">Применить</button> </div>
     </form>
-
 {% if has_filter %}
   <a href="{%  url 'home' %}"> Очистить фильтр </a>
 {% endif %}

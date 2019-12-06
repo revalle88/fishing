@@ -11,22 +11,15 @@ class MapRenderView(View):
     def post(self, request):
         reviews = Review.objects.all()
         entity_filter_types = []
-        if len(request.POST.get('fish_filter'))>0:
-            fish_filter_ids = request.POST.get('fish_filter').split(',')
+        if request.POST.getlist('fish_filter'):
+            fish_filter_ids = request.POST.getlist('fish_filter')
             reviews = reviews.filter(fish_caught__in=fish_filter_ids)
-
-        if len(request.POST.get('method_filter'))>0:
-            method_filter_ids = request.POST.get('method_filter').split(',')
+        if request.POST.getlist('method_filter'):
+            method_filter_ids = request.POST.getlist('method_filter')
             reviews = reviews.filter(method__in=method_filter_ids)
-
-        if len(request.POST.get('entity_filter'))>0:
-            entity_filter_types = request.POST.get('entity_filter').split(',')
-            print(entity_filter_types)
-
+        if request.POST.getlist('entity_filter'):
+            entity_filter_types = request.POST.getlist('entity_filter')
         pounds = Pound.objects.all()
-        print('here AJAX!!!')
-        print(request.POST)
-        # print(reverse('fish_details', 'carp'))
         features = []
         geo_id = 0
         #add reviews
@@ -57,7 +50,6 @@ class MapRenderView(View):
         # add pounds
         if '2' in entity_filter_types or len(entity_filter_types) == 0:
             for pound in pounds:
-                print(geo_id)
                 item = {
                     "type": "Feature",
                     "id": geo_id,
