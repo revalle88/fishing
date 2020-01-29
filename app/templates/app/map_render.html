@@ -111,6 +111,7 @@ function init () {
 
         //stop submitting the form to see the disabled button effect
         e.preventDefault();
+        objectManager.removeAll();
         var method_filter = [];
         var fish_filter = [];
         var entity_filter = [];
@@ -130,9 +131,8 @@ function init () {
             headers: { "X-CSRFToken": getCookie("csrftoken") },
             data: {fish_filter: fish_filter, method_filter: method_filter, entity_filter: entity_filter}
         }).done(function(data) {
-            objectManager.removeAll();
-            objectManager.add(data);
             // to correctly refresh map
+            objectManager.add(data);
             myMap.setZoom(myMap.getZoom() + 1);
             myMap.setZoom(myMap.getZoom() - 1);
         });
