@@ -22,7 +22,7 @@ class MapRenderView(View):
         pounds = Pound.objects.all()
         features = []
         geo_id = 0
-        #add reviews
+        # add reviews
         if '1' in entity_filter_types or len(entity_filter_types) == 0:
             # add reviews
             for review in reviews:
