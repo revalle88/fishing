@@ -3,8 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 
-from ..filters import ReviewFilter, MapFilter
-from ..models import Pound, Review, Fish, Method
+from ..filters import MapFilter
 
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy

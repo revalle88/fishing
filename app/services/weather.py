@@ -15,11 +15,9 @@ class WeatherManager(object):
         if self.coll.find({"latitude": lat, "longitude": lang}).count() == 0:
             with urllib.request.urlopen("https://api.darksky.net/forecast/caf0208379875df865f2185f5246bf48/"+str(lat)+","+str(lang)+"?units=auto") as url:
                 resp = url.read()
-            print('not in mongo')
             resp_jsonified = json.loads(resp)
             weather = resp_jsonified.get('currently')
             self.coll.save(resp_jsonified)
         else:
             weather = self.coll.find_one({"latitude": lat, "longitude": lang})['currently']
-            print('in mongo')
         return weather

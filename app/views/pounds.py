@@ -8,15 +8,20 @@ from ..models import Pound, Review, Photo
 from ..forms import PoundForm
 
 from django.shortcuts import redirect
+from django.views.generic import ListView
 
 
-def pound_list(request):
-    pounds = Pound.objects.all()
-    return render(request, 'app/pound_list.html', {"pounds": pounds})
+class PoundListView(ListView):
+    model = Pound
+    template_name = 'app/pound_list.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(PoundListView, self).get_context_data(**kwargs)
+        pounds = self.get_queryset()
+        context['pounds'] = pounds
+        return context
 
 def pound_show(request, slug):
-    print("Нахуй ты сюда идешь?")
     pound = Pound.objects.filter(slug=slug)[0]
     point = {"lat": pound.lat, "lang": pound.lang}
     reviews = Review.objects.filter(pound=pound)

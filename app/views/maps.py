@@ -1,9 +1,7 @@
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.http import JsonResponse
-from django.urls import reverse
 from django.views import View
 
-from app.filters import ReviewFilter
 from app.models import Review, Pound
 
 
