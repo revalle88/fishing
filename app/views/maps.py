@@ -1,9 +1,7 @@
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.http import JsonResponse
-from django.urls import reverse
 from django.views import View
 
-from app.filters import ReviewFilter
 from app.models import Review, Pound
 
 
@@ -22,7 +20,7 @@ class MapRenderView(View):
         pounds = Pound.objects.all()
         features = []
         geo_id = 0
-        #add reviews
+        # add reviews
         if '1' in entity_filter_types or len(entity_filter_types) == 0:
             # add reviews
             for review in reviews:

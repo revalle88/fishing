@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   db:
-    image: postgres
+    image: postgres:11-alpine
     container_name: geofishing_db
     ports:
       - "5436:5432"
